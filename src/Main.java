@@ -13,18 +13,15 @@ public class Main {
 
     }
     static int lowest_of_arr2(int... arr){
-        lowest = (arr[0] < arr[1]) ? arr[0] : arr[1];
-        return lowest;
+        return lowest = (arr[0] < arr[1]) ? arr[0] : arr[1];
     }
     static int lowest_of_arr3(int... arr){
         int of_2 = lowest_of_arr2(arr);
-        lowest = (of_2 < arr[2]) ? of_2 : arr[2];
-        return lowest;
+        return lowest = (of_2 < arr[2]) ? of_2 : arr[2];
     }
     static int lowest_of_arr4(int... arr){
         int of_3 = lowest_of_arr3(arr);
-        lowest = (of_3 < arr[3]) ? of_3 : arr[3];
-        return lowest;
+        return lowest = (of_3 < arr[3]) ? of_3 : arr[3];
     }
 }
 
