@@ -6,24 +6,29 @@ public class task5 {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(in);
-        out.print("Enter number of disks: ");
-        int N = scan.nextInt();
+        int N;
+        boolean check = true;
+        do {
+            out.print((check)? "Enter number of disks: " : "Number of disks can`t be less than 0. Enter it again: ");
+            N = scan.nextInt();
+            check = false;
+        }
+        while(N <=0);
 
-        out.println("We need replace '" + N + "' disks from A to C in " + ((int)Math.pow(2.0, N)-1) + " steps");
+        out.println("\nWe need replace '" + N + "' disks from A to C in " + ((int)Math.pow(2.0, N)-1) + " steps");
         Towers(N, 1, 3, 2);
-        out.println("We replaced '" + N + "' disks from A to C in " + count + " steps");
+        out.println("\nWe replaced '" + N + "' disks from A to C in " + count + " steps");
     }
-    static void Towers(int number, int from, int to, int free)
+    static void Towers(int number, int a, int c, int b)
     {
         if(number!=0)
         {
-            Towers(number-1, from, free, to);
+            Towers(number-1, a, b, c);
 
             count++;
-            out.println("\n  Step " + count + ": take off disk " + number + " from stick " + from + " and put on to stick " + to);
+            out.println("\n  Step " + count + ": take off disk " + number + " from stick " + a + " and put on to stick " + c);
 
-            Towers(number-1,  free, to, from);
-
+            Towers(number-1,  b, c, a);
         }
     }
 }
