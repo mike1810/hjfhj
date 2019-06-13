@@ -3,27 +3,36 @@ package task4;
 import static java.lang.System.*;
 import java.util.Scanner;
 
-public class task4 {
+public class task4{
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(in);
-
-        char searched;
-        searched = scan.next().charAt(0);
-
-        out.println(searched);
-
-        String text = "Have i got searched symbol?";
-        out.println(text);
-
-        int check = 0;
-        for(char ch : text.toCharArray())
-        {
-            if(searched == ch){
-                check++;
-            }
+        String key;
+        boolean check = false;
+        do{
+            out.println((check)?("It`s a string, please enter only one symbol you need to find:"):("Enter only one symbol you need to find:"));
+            check = true;
+            key = scan.next();
         }
-        out.println((check == 0)?("You have not got"):("You have got symbol '" + searched + "' " + check + " times"));
+        while(key.length() > 1 || key.length() < 0);
+
+        String text = "Have this text got searched symbol?";
+        find_key(text, key);
     }
 
+    static void find_key(String text, String key){
+        out.println("Your symbol is '" + key + "'");
+        out.println(text);
+        int count = 0;
+        for(char a : text.toCharArray())
+        {
+            for(char b : key.toCharArray())
+            {
+                if(a==b){
+                    count++;
+                }
+            }
+        }
+        out.println((count == 0)?("You have not got"):("You have got symbol '" + key + "' " + count + " times"));
+    }
 }
