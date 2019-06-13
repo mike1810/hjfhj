@@ -22,7 +22,7 @@ public class task3 {
 
         //selection sort
         array_fill(array);// fill array
-        out.println("\nArray before selection sort result:");
+        out.println("\nArray before selection sort:");
         print_arr(array);// show array
         selection_sort(array);// doing selection sort
         out.println("Selection sort result:");
@@ -30,7 +30,7 @@ public class task3 {
 
         //insertion sort
         array_fill(array);// fill array again
-        out.println("\nArray before insertion sort result:");
+        out.println("\nArray before insertion sort:");
         print_arr(array);// show array
         insertion_sort(array);// doing insertion sort
         out.println("Insertion sort result:");
