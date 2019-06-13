@@ -16,10 +16,10 @@ public class task5 {
         while(N <=0);
 
         out.println("\nWe need replace '" + N + "' disks from A to C in " + ((int)Math.pow(2.0, N)-1) + " steps");
-        Towers(N, 1, 3, 2);
+        Towers(N, "A", "C", "B");
         out.println("\nWe replaced '" + N + "' disks from A to C in " + count + " steps");
     }
-    static void Towers(int number, int a, int c, int b)
+    static void Towers(int number, String a, String c, String b)
     {
         if(number!=0)
         {
