@@ -9,22 +9,31 @@ public class task3 {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(in);
-
-        out.println("Input array size");
-        int arr_size = scan.nextInt();
+        int arr_size;
+        boolean check = true;
+        do {
+            out.println((check)?"Input array size(above 0):":("Input array size again, last value is not above 0:"));
+            arr_size = scan.nextInt();
+            check = false;
+        }
+        while(arr_size<=0);
 
         int array[] = new int[arr_size];
 
         //selection sort
         array_fill(array);// fill array
+        out.println("\nArray before selection sort result:");
         print_arr(array);// show array
         selection_sort(array);// doing selection sort
+        out.println("Selection sort result:");
         print_arr(array);// show array after selection sorting
 
         //insertion sort
         array_fill(array);// fill array again
+        out.println("\nArray before insertion sort result:");
         print_arr(array);// show array
         insertion_sort(array);// doing insertion sort
+        out.println("Insertion sort result:");
         print_arr(array);// show array after insertion sorting
 
     }
@@ -37,9 +46,8 @@ public class task3 {
 
     static void insertion_sort(int... array)
     {
-        int size = array.length;
         int temp, x;
-        for (int i = 1;i < size;i++)
+        for (int i = 1; i < array.length; i++)
         {
             x = array[i];
             int j = i;
