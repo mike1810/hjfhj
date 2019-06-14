@@ -102,12 +102,9 @@ public class task2 {
         while(max_index > min_index){
 
             compared_with = (min_index+max_index)/2;
-            if(max_index - min_index == 2){
-                if(array[min_index+1] == key)
-                {
+            if(max_index - min_index == 2 && array[min_index+1] == key){
                     in = true;
                     return in;
-                }
             }
 
             if(array[compared_with] == key){
