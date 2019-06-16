@@ -1,4 +1,4 @@
-package obj_bas_pr3;
+/*package obj_bas_pr3;
 
 import static java.lang.System.out;
 public class obj_bas_pr3 {
@@ -11,8 +11,10 @@ public class obj_bas_pr3 {
         check = CheckDogName("TUZeK", check);
         out.println(check);
 
+        Dog sharik = new Dog("SHARIK", Size.BIG,12);
+
     }
-    class Dog{
+    static class Dog{
         String name;
         Size size;
         int age;
@@ -22,17 +24,26 @@ public class obj_bas_pr3 {
             this.name = name;
             this.size = size;
             this.age = age;
-
         }
         Dog(Size size, int age){
-            int a = DogName.values().length;
-            this(,size,age);
+            this("", size,age);
+            this.name = GiveDogName();
+        }
+        private String GiveDogName(){
+            DogName dogNameArray [] = DogName.values();
+            int dogIndex =  (int)(Math.random()*dogNameArray.length);
+            return dogNameArray[dogIndex].code;
+        }
+        private String GiveDogSize(){
+            Size dogSizeArray [] = Size.values();
+            int dogIndex =  (int)(Math.random()*dogSizeArray.length);
+            return dogSizeArray[dogIndex].code;
         }
 
 
     }
     enum Size{
-        big("Big"),small("Small"),medium("Medium");
+        BIG("Big"),SMALL("Small"),MEDIUM("Medium");
         private String code;
         Size(String code){
             this.code = code;
@@ -47,17 +58,16 @@ public class obj_bas_pr3 {
         DogName(String code){
             this.code = code;
         }
-
-
     }
+
     static boolean CheckDogName(String Name, boolean check){
         check = false;
         DogName[] types = DogName.values();
         for(DogName name: types){
-
             if(name.code == Name){
                 check = true;}
         }
         return check;
     }
-}
+
+}*/
