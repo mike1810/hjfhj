@@ -43,37 +43,55 @@ public class TurtleGraphics {
         }
     }
     public void movePen(Direction dir,int length){
-
     }
     public void movePenUp(int length){
+        int posY = penPosition.getY();
+        int posX = penPosition.getX();
+        for(int i = 0; i >=  length; i--){
+            board[posX - i][posY] = coloredCellChar;
+            penPosition.setX(posX- i);
+        }
+        out.println("(" + penPosition.getX() + "." + penPosition.getY() + ")" );
+        board[penPosition.getX()][penPosition.getY()] = penChar;
     }
+
     public void movePenRight(int length){
 
         int posY = penPosition.getY();
         int posX = penPosition.getX();
+        out.println("(" + posX + "." + posY + ")" );
         for(int j = 0; j <=  length; j++){
-            board[penPosition.getX()][j] = coloredCellChar;
-            penPosition.setY(j);
-
+            board[posX][posY + j] = coloredCellChar;
+            penPosition.setY(posY + j);
         }
+        out.println("(" + penPosition.getX() + "." + penPosition.getY() + ")" );
         board[penPosition.getX()][penPosition.getY()] = penChar;
     }
+
     public void movePenLeft(int length){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
-        for(int j = 0; j >=  length; j--){
-            board[penPosition.getX()][j] = coloredCellChar;
-            penPosition.setY(j);
+        out.println("(" + posX + "." + posY + ")" );
+        for(int j = 0; j <=  length; j++){
+            board[posX][posY - j] = coloredCellChar;
+            penPosition.setY(posY - j);
         }
+        out.println("(" + penPosition.getX() + "." + penPosition.getY() + ")" );
         board[penPosition.getX()][penPosition.getY()] = penChar;
-
     }
     public void movePenDown(int length){
-
+        int posY = penPosition.getY();
+        int posX = penPosition.getX();
+        for(int i = 0; i >=  length; i--){
+            board[posX + i][posY] = coloredCellChar;
+            penPosition.setX(posX + i);
+        }
+        out.println("(" + penPosition.getX() + "." + penPosition.getY() + ")" );
+        board[penPosition.getX()][penPosition.getY()] = penChar;
     }
-    public void clearBoard(int length){
-
-    }
+    //public void clearBoard(){
+    //
+    //}
 
 
 
