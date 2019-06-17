@@ -1,4 +1,5 @@
 package obj_bas_pr5;
+
 import static java.lang.System.*;
 
 public class TurtleGraphics {
@@ -18,12 +19,15 @@ public class TurtleGraphics {
     TurtleGraphics(){
         turtleGraphicsBoardInit();
     }
-    TurtleGraphics(int length, int width, int penPositionX, int penPositionY){
+    TurtleGraphics(int height, int width, int penPositionX, int penPositionY){
         this.penPosition = new Position(penPositionX, penPositionY);
-        board = new char[width][length];
+        board = new char[height][width];
         turtleGraphicsBoardInit();
     }
-    protected void turtleGraphicsBoardInit(int length, int width, int penPositionX, int penPositionY){
+    protected void getPosition(){
+        out.println("Turtle position is: "+ penPosition.getX()+" column, " + penPosition.getY() + " row.");
+    }
+    protected void turtleGraphicsBoardInit(int height, int width, int penPositionX, int penPositionY){
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++)
             {
@@ -55,65 +59,67 @@ public class TurtleGraphics {
         out.println();
         }
     }
-    protected void movePen(Direction dir, int length){
-        if(dir.code == 'u'){
-            length = (this.penPosition.getX() - length < 0) ? this.penPosition.getX() : length;
-            movePenUp(length);
+    protected void movePen(Direction dir, int userSteps){
+        int realSteps = userSteps;
+        switch(dir.code){
+            case 'u':
+                realSteps = (this.penPosition.getX() - realSteps < 0) ? this.penPosition.getX() : realSteps;
+                movePenUp(realSteps);
+                break;
+            case 'd':
+                realSteps = (this.penPosition.getX() +  realSteps  >= board.length - 1) ?
+                        (board.length - (this.penPosition.getX()+1)) : realSteps;
+                movePenDown(realSteps);
+                break;
+            case 'l':
+                realSteps = (this.penPosition.getY() - realSteps < 0) ? this.penPosition.getY() : realSteps;
+                movePenLeft(realSteps);
+                break;
+            case 'r':
+                realSteps = (this.penPosition.getY() +  realSteps  >= board[penPosition.getX()].length - 1) ?
+                        (board[penPosition.getX()].length - (this.penPosition.getY()+1)) : realSteps;
+                movePenRight(realSteps);
+                break;
         }
-        if(dir.code == 'd'){
-            length = (this.penPosition.getX() +  length  >= board.length - 1) ?
-                     (board.length - (this.penPosition.getX()+1)) : length;
-            movePenDown(length);
-        }
-        if(dir.code == 'l'){
-            length = (this.penPosition.getY() - length < 0) ? this.penPosition.getY() : length;
-            movePenLeft(length);
-        }
-        if(dir.code == 'r'){
-            length = (this.penPosition.getY() +  length  >= board[penPosition.getX()].length - 1) ?
-                    (board[penPosition.getX()].length - (this.penPosition.getY()+1)) : length;
-            movePenRight(length);
-        }
+        out.println((realSteps < userSteps)?
+                ("Turtle was able to move only " + realSteps + " steps"):
+                ("Turtle was moving " + realSteps + " steps"));
     }
-    private void movePenUp(int length){
+    private void movePenUp(int steps){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
-        for(int i = 0; i <=  length; i++){
+        for(int i = 0; i <=  steps; i++){
             board[posX - i][posY] = coloredCellChar;
             penPosition.setX(posX - i);
         }
-        out.println("Position: (" + penPosition.getX() + "." + penPosition.getY() + ")" );
         board[penPosition.getX()][penPosition.getY()] = penChar;
     }
-    private void movePenRight(int length){
+    private void movePenRight(int steps){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
-        for(int j = 0; j <=  length; j++){
+        for(int j = 0; j <=  steps; j++){
             board[posX][posY + j] = coloredCellChar;
             penPosition.setY(posY + j);
         }
         board[penPosition.getX()][penPosition.getY()] = penChar;
-        out.println("Position: (" + penPosition.getX() + "." + penPosition.getY() + ")" );
     }
-    private void movePenLeft(int length){
+    private void movePenLeft(int steps){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
-        for(int j = 0; j <=  length; j++){
+        for(int j = 0; j <=  steps; j++){
             board[posX][posY - j] = coloredCellChar;
             penPosition.setY(posY - j);
         }
         board[penPosition.getX()][penPosition.getY()] = penChar;
-        out.println("(" + penPosition.getX() + "." + penPosition.getY() + ")" );
     }
-    private void movePenDown(int length){
+    private void movePenDown(int steps){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
-        for(int i = 0; i <=  length; i++){
+        for(int i = 0; i <=  steps; i++){
             board[posX + i][posY] = coloredCellChar;
             penPosition.setX(posX + i);
         }
         board[penPosition.getX()][penPosition.getY()] = penChar;
-        out.println("Position: (" + penPosition.getX() + "." + penPosition.getY() + ")" );
     }
     enum Direction{
         UP('u'),DOWN('d'),LEFT('l'),RIGHT('r');
