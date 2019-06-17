@@ -1,4 +1,4 @@
-package obj_bas_pr1_1;
+package obj_bas_pr1;
 
 import static java.lang.System.out;
 
@@ -6,20 +6,17 @@ public class Author {
 
     private String firstName;
     private String lastName;
-
-
-    Author(){
-        firstName = "Nameless";
-        lastName = "Author";
-    }
     Author(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
     }
-    public void printAuthor(){
+    Author(){
+        this("Mr or ms","w/o last name");
+    }
+    protected void printAuthor(){
         out.println(firstName + " " + lastName);
     }
-    public String authorDetailsToBook(){
+    protected String authorDetailsToBook(){
         return (firstName + " " + lastName);
     }
 }

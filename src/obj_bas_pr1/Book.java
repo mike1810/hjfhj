@@ -1,4 +1,4 @@
-package obj_bas_pr1_1;
+package obj_bas_pr1;
 
 import static java.lang.System.out;
 
@@ -13,11 +13,9 @@ public class Book {
         this.price = price;
     }
     Book(String title, double price ){
-        this.title = title;
-        this.author = new Author();
-        this.price = price;
+        this(title, new Author(), price);
     }
-    public void bookDetails(){
+    protected void bookDetails(){
         out.println("\nBook title: " + title + "\nBook author: " +
                 author.authorDetailsToBook() + "\nBook price : " + price + "$");
         //Если отталкиваться от того, что в задании нужно реализовать метод вывода данных об авторе на экран
