@@ -7,7 +7,7 @@ public class task1 {
     static int lowest;
     public static void main(String[] args) {
         // write your code here
-        int arr4 [] = {6,5,4,3};
+        int[] arr4 = {6, 5, 4, 3};
 
         out.printf("Array has a lowest: %d\n", lowest_of_arr(arr4[0], arr4[1]));
         out.printf("Array has a lowest: %d\n", lowest_of_arr(arr4[0], arr4[1], arr4[2]));

@@ -11,34 +11,34 @@ import java.util.Scanner;
 public class DogsDemo {
 
     public static void main(String[] args) {
-        Dog [] DogArray = new Dog[]{};
-        DogArray = GenerateDogArray();
+        Dog [] dogArray;
+        dogArray = GenerateDogArray();
         out.println("\nArray before sorting");
-        DogDetails(DogArray);
+        DogDetails(dogArray);
 
         ///*
         out.println("\nArray after sorting by name(ascending)");
-        InsertionSortingOfDogArrayByNameAsc(DogArray);
-        DogDetails(DogArray);
+        InsertionSortingOfDogArrayByNameAsc(dogArray);
+        DogDetails(dogArray);
         out.println("\nArray after sorting by name(descending)");
-        InsertionSortingOfDogArrayByNameDesc(DogArray);
-        DogDetails(DogArray);
+        InsertionSortingOfDogArrayByNameDesc(dogArray);
+        DogDetails(dogArray);
         //*/
         ///*
         out.println("\nArray after sorting by size(ascending)");
-        InsertionSortingOfDogArrayBySizeAsc(DogArray);
-        DogDetails(DogArray);
+        InsertionSortingOfDogArrayBySizeAsc(dogArray);
+        DogDetails(dogArray);
         out.println("\nArray after sorting by size(descending)");
-        InsertionSortingOfDogArrayBySizeDesc(DogArray);
-        DogDetails(DogArray);
+        InsertionSortingOfDogArrayBySizeDesc(dogArray);
+        DogDetails(dogArray);
         //*/
         ///*
         out.println("\nArray after sorting by Age");
-        InsertionSortingOfDogArrayByAgeAsc(DogArray);
-        DogDetails(DogArray);
+        InsertionSortingOfDogArrayByAgeAsc(dogArray);
+        DogDetails(dogArray);
         out.println("\nArray after sorting by Age");
-        InsertionSortingOfDogArrayByAgeDesc(DogArray);
-        DogDetails(DogArray);
+        InsertionSortingOfDogArrayByAgeDesc(dogArray);
+        DogDetails(dogArray);
         //*/
     }
     public static void DogDetails(Dog [] DogArray){
@@ -66,7 +66,6 @@ public class DogsDemo {
         }
         return newDogName;
     }
-
     private static Size GenerateDogSize(){
         Scanner scan = new Scanner(in);
         String sizeIsKnown;
@@ -120,7 +119,6 @@ public class DogsDemo {
         }
         return newDogAge;
     }
-
     private static Dog [] GenerateDogArray()  throws NumberFormatException{
         Scanner scan = new Scanner(in);
 
@@ -158,7 +156,7 @@ public class DogsDemo {
         return dog;
     }
     public static void InsertionSortingOfDogArrayByNameAsc( Dog [] DogArray){
-        Dog temporary = new Dog();
+        Dog temporary;
         for (int min = 0; min < DogArray.length - 1; min++) {
             int least = min;
             for (int j = min + 1; j < DogArray.length; j++) {
@@ -172,7 +170,7 @@ public class DogsDemo {
         }
     }
     public static void InsertionSortingOfDogArrayBySizeDesc( Dog [] DogArray){
-        Dog temporary = new Dog();
+        Dog temporary;
         for (int min = 0; min < DogArray.length - 1; min++) {
             int least = min;
             for (int j = min + 1; j < DogArray.length; j++) {
@@ -186,7 +184,7 @@ public class DogsDemo {
         }
     }
     public static void InsertionSortingOfDogArrayByAgeAsc( Dog [] DogArray){
-        Dog temporary = new Dog();
+        Dog temporary;
         for (int min = 0; min < DogArray.length - 1; min++) {
             int least = min;
             for (int j = min + 1; j < DogArray.length; j++) {
@@ -200,7 +198,7 @@ public class DogsDemo {
         }
     }
     public static void InsertionSortingOfDogArrayByNameDesc( Dog [] DogArray){
-        Dog temporary = new Dog();
+        Dog temporary;
         for (int min = 0; min < DogArray.length - 1; min++) {
             int least = min;
             for (int j = min + 1; j < DogArray.length; j++) {
@@ -214,7 +212,7 @@ public class DogsDemo {
         }
     }
     public static void InsertionSortingOfDogArrayBySizeAsc( Dog [] DogArray){
-        Dog temporary = new Dog();
+        Dog temporary;
         for (int min = 0; min < DogArray.length - 1; min++) {
             int least = min;
             for (int j = min + 1; j < DogArray.length; j++) {
@@ -228,7 +226,7 @@ public class DogsDemo {
         }
     }
     public static void InsertionSortingOfDogArrayByAgeDesc( Dog [] DogArray){
-        Dog temporary = new Dog();
+        Dog temporary;
         for (int min = 0; min < DogArray.length - 1; min++) {
             int least = min;
             for (int j = min + 1; j < DogArray.length; j++) {

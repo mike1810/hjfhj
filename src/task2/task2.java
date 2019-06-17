@@ -4,7 +4,6 @@ import static java.lang.System.*;
 import static java.lang.Math.*;
 import java.util.Arrays;
 import java.util.Scanner;
-//import java.util.concurrent.TimeUnit;
 
 public class task2 {
 
@@ -29,7 +28,7 @@ public class task2 {
         }
         while(searched > N || searched < 0);
 
-        int array[] = new int[arr_size];
+        int[] array = new int[arr_size];
 
         for(int i = 0; i < array.length; i++){
             array[i] = (int)(random()*N);

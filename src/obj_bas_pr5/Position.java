@@ -3,6 +3,7 @@ package obj_bas_pr5;
 public class Position {
     private int x;
     private int y;
+
     Position(){
         this.x = 0;
         this.y = 0;

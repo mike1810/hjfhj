@@ -18,7 +18,7 @@ public class task3 {
         }
         while(arr_size<=0);
 
-        int array[] = new int[arr_size];
+        int[] array = new int[arr_size];
 
         //selection sort
         array_fill(array);// fill array

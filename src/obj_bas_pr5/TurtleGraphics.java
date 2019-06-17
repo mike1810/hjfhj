@@ -2,26 +2,28 @@ package obj_bas_pr5;
 import static java.lang.System.*;
 
 public class TurtleGraphics {
-    public char board [][];
-    public Position penPosition;
-    public char cellChar;//'.'
-    public char coloredCellChar;//'o'
-    public char penChar;//'x'
+    private char[][] board;
+    private Position penPosition;
+    private char cellChar;//'.'
+    private char coloredCellChar;//'o'
+    private char penChar;//'x'
     {
         this.penPosition = new Position(0,0);
         this.cellChar = '.';
         this.coloredCellChar = 'o';
         this.penChar = 'x';
         this.board = new char[5][5];
-        this.turtleGraphicsInit();
+        this.turtleGraphicsBoardInit();
+    }
+    TurtleGraphics(){
+        turtleGraphicsBoardInit();
     }
     TurtleGraphics(int length, int width, int penPositionX, int penPositionY){
         this.penPosition = new Position(penPositionX, penPositionY);
         board = new char[width][length];
-        turtleGraphicsInit();
+        turtleGraphicsBoardInit();
     }
-    private void turtleGraphicsInit(){
-
+    protected void turtleGraphicsBoardInit(int length, int width, int penPositionX, int penPositionY){
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++)
             {
@@ -30,10 +32,21 @@ public class TurtleGraphics {
         }
         board[penPosition.getX()][penPosition.getY()] = penChar;
     }
-    public void clearBoard(){
-        //this = new TurtleGraphics();
+    private void turtleGraphicsBoardInit(){
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i].length; j++)
+            {
+                board[i][j] = cellChar;
+            }
+        }
+        board[penPosition.getX()][penPosition.getY()] = penChar;
     }
-    public void showBoard(){
+    protected void clearBoard(){
+        penPosition.setX(0);
+        penPosition.setY(0);
+        turtleGraphicsBoardInit();
+    }
+    protected void showBoard(){
         for(int i = 0; i < board.length; i++){
         for(int j = 0; j < board[i].length; j++)
         {
@@ -42,64 +55,69 @@ public class TurtleGraphics {
         out.println();
         }
     }
-    public void movePen(Direction dir,int length){
+    protected void movePen(Direction dir, int length){
+        if(dir.code == 'u'){
+            length = (this.penPosition.getX() - length < 0) ? this.penPosition.getX() : length;
+            movePenUp(length);
+        }
+        if(dir.code == 'd'){
+            length = (this.penPosition.getX() +  length  >= board.length - 1) ?
+                     (board.length - (this.penPosition.getX()+1)) : length;
+            movePenDown(length);
+        }
+        if(dir.code == 'l'){
+            length = (this.penPosition.getY() - length < 0) ? this.penPosition.getY() : length;
+            movePenLeft(length);
+        }
+        if(dir.code == 'r'){
+            length = (this.penPosition.getY() +  length  >= board[penPosition.getX()].length - 1) ?
+                    (board[penPosition.getX()].length - (this.penPosition.getY()+1)) : length;
+            movePenRight(length);
+        }
     }
-    public void movePenUp(int length){
+    private void movePenUp(int length){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
-        for(int i = 0; i >=  length; i--){
+        for(int i = 0; i <=  length; i++){
             board[posX - i][posY] = coloredCellChar;
-            penPosition.setX(posX- i);
+            penPosition.setX(posX - i);
         }
-        out.println("(" + penPosition.getX() + "." + penPosition.getY() + ")" );
+        out.println("Position: (" + penPosition.getX() + "." + penPosition.getY() + ")" );
         board[penPosition.getX()][penPosition.getY()] = penChar;
     }
-
-    public void movePenRight(int length){
-
+    private void movePenRight(int length){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
-        out.println("(" + posX + "." + posY + ")" );
         for(int j = 0; j <=  length; j++){
             board[posX][posY + j] = coloredCellChar;
             penPosition.setY(posY + j);
         }
-        out.println("(" + penPosition.getX() + "." + penPosition.getY() + ")" );
         board[penPosition.getX()][penPosition.getY()] = penChar;
+        out.println("Position: (" + penPosition.getX() + "." + penPosition.getY() + ")" );
     }
-
-    public void movePenLeft(int length){
+    private void movePenLeft(int length){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
-        out.println("(" + posX + "." + posY + ")" );
         for(int j = 0; j <=  length; j++){
             board[posX][posY - j] = coloredCellChar;
             penPosition.setY(posY - j);
         }
-        out.println("(" + penPosition.getX() + "." + penPosition.getY() + ")" );
         board[penPosition.getX()][penPosition.getY()] = penChar;
+        out.println("(" + penPosition.getX() + "." + penPosition.getY() + ")" );
     }
-    public void movePenDown(int length){
+    private void movePenDown(int length){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
-        for(int i = 0; i >=  length; i--){
+        for(int i = 0; i <=  length; i++){
             board[posX + i][posY] = coloredCellChar;
             penPosition.setX(posX + i);
         }
-        out.println("(" + penPosition.getX() + "." + penPosition.getY() + ")" );
         board[penPosition.getX()][penPosition.getY()] = penChar;
+        out.println("Position: (" + penPosition.getX() + "." + penPosition.getY() + ")" );
     }
-    //public void clearBoard(){
-    //
-    //}
-
-
-
-
-
     enum Direction{
-        up('u'),down('d'),left('l'),right('r');
-        char code;
+        UP('u'),DOWN('d'),LEFT('l'),RIGHT('r');
+        public char code;
         Direction(char code){this.code = code;}
     }
 }

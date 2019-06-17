@@ -48,7 +48,7 @@ class Dog {
         return dogNameArray[dogNameIndex].code;
     }
     protected static Size GiveDogSize(){
-        Size dogSizeArray [] = Size.values();
+        Size[] dogSizeArray = Size.values();
         int dogSizeIndex =  (int)(Math.random()*dogSizeArray.length);
         return dogSizeArray[dogSizeIndex];
     }
@@ -70,6 +70,7 @@ class Dog {
     enum DogName{
         SHARIK("SHARIK"),
         TUZIK("TUZIK"),
+        BARON("BARON"),
         BOBIK("BOBIK"),
         BRO("TOLIK");
         private String code;
