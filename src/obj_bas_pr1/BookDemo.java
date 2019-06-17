@@ -63,9 +63,16 @@ public class BookDemo {
         double newBookPrice;
 
         out.println("Enter book`s price(like '1' or '24,58'):");
-        newBookPrice = scan.nextDouble();
+        String checkEmptyDoubleValue = scan.nextLine();
+        if(checkEmptyDoubleValue.contains("")){
+            out.println("Was set min price = 0.0$");
+            newBookPrice = 0;
+            return newBookPrice;
+        }
+        newBookPrice = Double.parseDouble(checkEmptyDoubleValue);
+
         if(newBookPrice < 0 ){
-            out.println("Min price = 0.0$");
+            out.println("Was set min price = 0.0$");
             newBookPrice = 0;
         }
         return newBookPrice;
