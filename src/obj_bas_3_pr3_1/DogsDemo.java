@@ -40,16 +40,13 @@ public class DogsDemo {
         InsertionSortingOfDogArrayByAgeDesc(DogArray);
         DogDetails(DogArray);
         //*/
-
     }
-
     public static void DogDetails(Dog [] DogArray){
         for(int i = 0; i < DogArray.length; i++){
             out.print("Dog " + (i+1) + " in array: ");
             DogArray[i].DogDetails();
         }
     }
-
     private static String GenerateDogName(){
         Scanner scan = new Scanner(in);
         String nameIsKnown;

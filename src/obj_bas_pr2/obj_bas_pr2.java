@@ -17,6 +17,7 @@ public class obj_bas_pr2 {
         Tick(10, firstClock);
         Clock secondClock = new Clock(getHoursForTimeConstructor(),getMinutesForTimeConstructor(),getSecondsForTimeConstructor());
         secondClock.clockRepresentation();
+        TickDown(10, secondClock);
 
     }
 
@@ -77,10 +78,10 @@ public class obj_bas_pr2 {
     static void TickDown(int tickForSoManySeconds, Clock clock){
         out.println("We will set clock " + tickForSoManySeconds + " seconds back");
         for(int i = 0; i < tickForSoManySeconds; i++){
-            clock.tick();
-            out.print((i+1) + " tick time:"); clock.clockRepresentation();
+            clock.tickDown();
+            out.print((i+1) + " tick back time:"); clock.clockRepresentation();
         }
-        out.println("After " + tickForSoManySeconds + " seconds, time o` clock is:");
+        out.println(tickForSoManySeconds + " seconds back, time o` clock was:");
         clock.clockRepresentation();
 
 
@@ -92,7 +93,6 @@ public class obj_bas_pr2 {
         }
     }
 }
-
 class Clock{
     private int hours;
     private int minutes;

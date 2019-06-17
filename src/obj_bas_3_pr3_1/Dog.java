@@ -9,7 +9,6 @@ class Dog {
         this.name = GiveDogName();
         this.size = GiveDogSize();
         this.age = GiveDogAge();
-
     }
     Dog(String name, Size size, int age){
         this.name = name;
@@ -72,7 +71,7 @@ class Dog {
         SHARIK("SHARIK"),
         TUZIK("TUZIK"),
         BOBIK("BOBIK"),
-        BRO("BRO");
+        BRO("TOLIK");
         private String code;
         DogName(String code){
             this.code = code;

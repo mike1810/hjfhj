@@ -30,6 +30,9 @@ public class TurtleGraphics {
         }
         board[penPosition.getX()][penPosition.getY()] = penChar;
     }
+    public void clearBoard(){
+        //this = new TurtleGraphics();
+    }
     public void showBoard(){
         for(int i = 0; i < board.length; i++){
         for(int j = 0; j < board[i].length; j++)
@@ -47,17 +50,18 @@ public class TurtleGraphics {
     public void movePenRight(int length){
 
         int posY = penPosition.getY();
-        int posX = penPosition.getY();
-        for(int j = penPosition.getY(); j <=  posY + length; j++){
+        int posX = penPosition.getX();
+        for(int j = 0; j <=  length; j++){
             board[penPosition.getX()][j] = coloredCellChar;
             penPosition.setY(j);
+
         }
         board[penPosition.getX()][penPosition.getY()] = penChar;
     }
     public void movePenLeft(int length){
         int posY = penPosition.getY();
-        int posX = penPosition.getY();
-        for(int j = penPosition.getY(); j >=  posY - length; j--){
+        int posX = penPosition.getX();
+        for(int j = 0; j >=  length; j--){
             board[penPosition.getX()][j] = coloredCellChar;
             penPosition.setY(j);
         }
@@ -65,6 +69,9 @@ public class TurtleGraphics {
 
     }
     public void movePenDown(int length){
+
+    }
+    public void clearBoard(int length){
 
     }
 

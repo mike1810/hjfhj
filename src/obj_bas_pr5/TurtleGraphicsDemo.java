@@ -4,7 +4,7 @@ import obj_bas_pr5.Position;
 
 public class TurtleGraphicsDemo {
     public static void main(String[] args) {
-    TurtleGraphics turtle1 = new TurtleGraphics(7,5,2,2);
+    TurtleGraphics turtle1 = new TurtleGraphics(7,5,0,3);
     turtle1.showBoard();
     turtle1.movePenRight(1);
     turtle1.showBoard();
