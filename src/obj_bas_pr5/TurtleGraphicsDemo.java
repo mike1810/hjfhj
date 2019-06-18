@@ -69,8 +69,20 @@ public class TurtleGraphicsDemo {
     }
     public static int getMoveSteps(){
         Scanner scan = new Scanner(in);
+        int moveSteps;
         out.println("Enter the number of steps ");
-        int moveSteps = scan.nextInt();
+        String checkEmptyStepValue = scan.nextLine();
+        if(checkEmptyStepValue.equals("")){
+            out.println("You don`t move");
+            moveSteps = 0;
+            return moveSteps;
+        }
+        moveSteps = Integer.parseInt(checkEmptyStepValue);
+        if(moveSteps < 0){
+            out.println("Number of steps can`t be less than 0. You don`t move");
+            moveSteps = 0;
+            return moveSteps;
+        }
         return moveSteps;
     }
 
