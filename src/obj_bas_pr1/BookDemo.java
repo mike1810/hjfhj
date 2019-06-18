@@ -69,6 +69,7 @@ public class BookDemo {
             newBookPrice = 0;
             return newBookPrice;
         }
+        checkEmptyDoubleValue.replace('.',',');
         newBookPrice = Double.parseDouble(checkEmptyDoubleValue);
 
         if(newBookPrice < 0 ){
