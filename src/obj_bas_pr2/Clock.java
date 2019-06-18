@@ -1,7 +1,5 @@
 package obj_bas_pr2;
 
-import static java.lang.System.out;
-
 class Clock{
     private int hours;
     private int minutes;
@@ -17,48 +15,53 @@ class Clock{
         seconds = 0;
     }
     Clock(int seconds){
-        setClockNotAfterMorning(seconds);
+        setClock(seconds);
     }
     Clock(int hours, int minutes, int seconds){
-        this.hours = hours;
-        this.minutes = minutes;
-        this.seconds = seconds;
+        int allSeconds = seconds+minutes*SIM + hours*SIH;
+        setClock(allSeconds);
     }
     protected void setClock(int seconds)
     {
-        int hours = (seconds - seconds%SIH)/(SIH);
-        this.hours = hours%HID;//после полуночи
-        this.seconds = seconds%SIM;
-        this.minutes = (seconds - this.seconds - hours*SIH)/60;
-    }
-    protected void setClockNotAfterMorning(int seconds)
-    {
-        this.hours = (seconds - seconds%SIH)/(SIH);
-        this.seconds = seconds%SIM;
-        this.minutes = (seconds - this.seconds - this.hours*SIH)/60;
+        if(seconds >= 0){
+            if(seconds >= SIH*HID){
+                //out.println("Time must have less than (24:00:00)" +
+                //        " so we set clock after midnight");
+            }
+            int userHours = (seconds - seconds%SIH)/(SIH);
+            this.hours = (userHours)%HID;//после полуночи
+            this.seconds = seconds%SIM;
+            this.minutes = (seconds - this.seconds - userHours*SIH)/60;
+        }
+        else{
+            do{
+                seconds +=SIH*HID;
+            }
+            while(seconds < 0);
+            setClock(seconds);
+        }
     }
     protected void tick(){
         addClock(new Clock(0,0,1));
     }
     protected void tickDown(){
-        if(this.hours > 0 || this.minutes > 0 || this.seconds > 0){
-            addClock(new Clock(0,0,-1));
-        }
+        addClock(new Clock(23,59,59));
     }
     protected void addClock(Clock clock){
         int hoursToSeconds = (this.hours+clock.hours)*SIH;
         int minutesToSeconds = (this.minutes+clock.minutes)*SIM;
         int allSeconds = (this.seconds+clock.seconds) + hoursToSeconds + minutesToSeconds;
-        setClockNotAfterMorning(allSeconds);
+        setClock(allSeconds);
     }
-    protected void subtractClock(Clock clock){
-        int hoursToSeconds = (this.hours - clock.hours)*SIH;
-        int minutesToSeconds = (this.minutes - clock.minutes)*SIM;
-        int allSeconds = (this.seconds - clock.seconds) + hoursToSeconds + minutesToSeconds;
-        out.println((allSeconds > 0) ? "Clock ":"");
-        setClockNotAfterMorning(allSeconds);
+    protected Clock subtractClock(Clock secondClock){
+        Clock firstClock = new Clock(this.hours, this.minutes, this.seconds);
+        int hoursToSeconds = (firstClock.hours - secondClock.hours)*SIH;
+        int minutesToSeconds = (firstClock.minutes - secondClock.minutes)*SIM;
+        int allSeconds = (firstClock.seconds - secondClock.seconds) + hoursToSeconds + minutesToSeconds;
+        firstClock.setClock(Math.abs(allSeconds));
+        return firstClock;
     }
-    void clockRepresentation(){
+    protected void clockRepresentation(){
         System.out.println( "(" + ((this.hours>9)?this.hours:("0"+this.hours)) + ":"
                 + ((this.minutes>9)?this.minutes:("0"+this.minutes)) + ":"
                 + ((this.seconds>9)?this.seconds:("0"+this.seconds)) + ")");
