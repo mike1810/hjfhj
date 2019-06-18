@@ -6,6 +6,10 @@ import static java.lang.System.out;
 public class DogsDemo {
 
     public static void main(String[] args) {
+        Dog [] dogArrayByString = new Dog[]{};
+        String userSet = "";
+        inputDogFromString(userSet, dogArrayByString);
+
         Dog [] dogArray;
         dogArray = inputDogArray();
         out.println("\nArray before sorting");

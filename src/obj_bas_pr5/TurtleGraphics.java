@@ -8,6 +8,7 @@ public class TurtleGraphics {
     private char cellChar;//'.'
     private char coloredCellChar;//'o'
     private char penChar;//'x'
+
     {
         this.penPosition = new Position(0,0);
         this.cellChar = '.';

@@ -8,6 +8,7 @@ class Dog {
     private String name;
     private Size size;
     private int age;
+
     Dog(){
         this.name = giveDogName();
         this.size = giveDogSize();
@@ -280,4 +281,32 @@ class Dog {
         int newDogAge = inputDogAge();//Указываем размер собаки}
         return new Dog(newDogName, newDogSize, newDogAge);//добавляем собаку с установленными значениями в массив
     }
+    /*
+    protected void inputDogFromString(String userSettings){
+        String[] userSettingsSplit = userSettings.split(" ");
+        boolean firstWordIsIntegerType = true;
+        int firstWord = 0;
+        try {
+            firstWord = Integer.parseInt(userSettingsSplit[0]);
+        }
+        catch(NumberFormatException ex){
+            firstWordIsIntegerType = false;
+        }
+        if(firstWord <= 0){
+            firstWordIsIntegerType = false;
+        }
+        out.println((firstWordIsIntegerType)?"Dogs array can be created":"Dogs array can`t be created");
+        for(int i = 1; i < userSettingsSplit.length; i++){
+        }
+        Dog [] dogToReturn = new Dog[firstWord];
+        if(firstWordIsIntegerType){
+
+            createDogArrayByStringUserSettings(dog);
+        }
+        return dog
+    }
+    protected void createDogArrayByStringUserSettings(Dog[] dog){
+
+    }
+    */
 }
