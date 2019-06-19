@@ -6,7 +6,6 @@ public class Circle {
     private double radius;
     private Colour colour;
 
-
     public Circle() {
         this.radius = 0.0;
         this.colour = Colour.BLACK;
@@ -39,8 +38,8 @@ public class Circle {
         System.out.println("Input radius( like 0 or 0,213)");
         java.util.Scanner scan = new java.util.Scanner(System.in);
         try {
-            String text = scan.nextLine();
-            double radius = Double.parseDouble(text);
+            String userRadius = scan.next();
+            double radius = Double.parseDouble(userRadius);
             setRadius(radius);
         }
         catch(NumberFormatException ex){
@@ -56,10 +55,6 @@ public class Circle {
         return this.colour;
     }
 
-    public void printColour() {
-        System.out.println(this.colour);
-    }
-
     public void setColour(String colour) {
         if(Colour.checkColour(colour)) {
             this.colour = Colour.getColour(colour);
@@ -67,15 +62,14 @@ public class Circle {
             System.out.println("Colour can`t be like this");
         }
     }
-    //
+
     public void inputColour() {
         System.out.println("Input colour( like 'red' or 'black')");
-        String colour = "";
+        String colour;
         java.util.Scanner scan = new java.util.Scanner(System.in);
         colour = scan.nextLine();
         setColour(colour);
     }
-    //
 
     @Override
     public String toString()

@@ -1,7 +1,7 @@
 package inheritanceAndPolymorphismPracticeTheFirst;
 
 public class Cylinder extends Circle {
-    double height;
+    private double height;
 
     public Cylinder() {
         super();
@@ -36,6 +36,19 @@ public class Cylinder extends Circle {
         }
     }
 
+    public void inputHeight(){
+        System.out.println("Input height( like 0 or 0,213)");
+        java.util.Scanner scan = new java.util.Scanner(System.in);
+        try {
+            String userHeight = scan.nextLine();
+            double height = Double.parseDouble(userHeight);
+            setHeight(height);
+        }
+        catch(NumberFormatException ex){
+            System.out.println("Invalid height value");
+        }
+    }
+
     public double getVolume() {
         return super.getArea() * height;
     }
@@ -51,8 +64,7 @@ public class Cylinder extends Circle {
         return  "Cylinder:" + "\n" +
                 "radius = " + this.getRadius() + "\n" +
                 "colour = " + this.getColour() + "\n" +
-                "area = " + getArea() +
+                "area = " + getArea() + "\n" +
                 "volume = " + getVolume();
     }
-
 }

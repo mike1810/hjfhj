@@ -18,9 +18,6 @@ public enum Colour {
         return definition;
     }
 
-    public String getColour() {
-        return definition;
-    }
     public static Colour getColour(String colour) {
         Colour getColour  = Colour.BLACK;
         Colour[] colourValues = Colour.values();
@@ -47,5 +44,4 @@ public enum Colour {
     public String toString(){
         return definition;
     }
-
 }

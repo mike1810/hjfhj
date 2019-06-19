@@ -6,10 +6,10 @@ public class Demo {
         circle.inputRadius();
         circle.inputColour();
         System.out.println(circle);
-        Cylinder cylinder = new Cylinder(2);
+        Cylinder cylinder = new Cylinder();
+        cylinder.inputHeight();
         cylinder.inputRadius();
         cylinder.inputColour();
         System.out.println(cylinder);
-        System.out.println(cylinder.getRadius());
     }
 }
