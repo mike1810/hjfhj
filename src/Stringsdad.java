@@ -1,5 +1,4 @@
 import static java.lang.System.out;
-import java.util.InputMismatchException;
 public class Stringsdad {
 
     public static void main(String[] args) {
