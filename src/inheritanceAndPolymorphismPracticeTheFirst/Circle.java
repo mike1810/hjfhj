@@ -36,11 +36,16 @@ public class Circle {
     }
     /////
     public void inputRadius() {
-        System.out.println("Input radius( like 0 or 0,213");
-        double radius;
+        System.out.println("Input radius( like 0 or 0,213)");
         java.util.Scanner scan = new java.util.Scanner(System.in);
-        radius = scan.nextDouble();
-        setRadius(radius);
+        try {
+            String text = scan.nextLine();
+            double radius = Double.parseDouble(text);
+            setRadius(radius);
+        }
+        catch(NumberFormatException ex){
+            System.out.println("Invalid radius value");
+        }
     }
 
     public double getArea() {
@@ -64,12 +69,7 @@ public class Circle {
         String colour = "";
         java.util.Scanner scan = new java.util.Scanner(System.in);
         colour = scan.nextLine();
-
-        if(Colour.checkColour(colour)) {
-            this.colour = Colour.getColour(colour);
-        } else {
-            System.out.println("invalid colour");
-        }
+        setColour(colour);
     }
     //
 
