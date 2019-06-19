@@ -27,14 +27,14 @@ public class Circle {
     }
 
     public void setRadius(double radius) {
-        if(radius > 0) {
+        if(radius >= 0) {
             this.radius = radius;
         }
         else{
             System.out.println("radius less than zero");
         }
     }
-    /////
+
     public void inputRadius() {
         System.out.println("Input radius( like 0 or 0,213)");
         java.util.Scanner scan = new java.util.Scanner(System.in);
@@ -53,19 +53,23 @@ public class Circle {
     }
 
     public Colour getColour() {
-        return colour;
+        return this.colour;
+    }
+
+    public void printColour() {
+        System.out.println(this.colour);
     }
 
     public void setColour(String colour) {
         if(Colour.checkColour(colour)) {
             this.colour = Colour.getColour(colour);
         } else {
-            System.out.println("cant paint this colour");
+            System.out.println("Colour can`t be like this");
         }
     }
     //
     public void inputColour() {
-        System.out.println("Input colour( like 'red' or 'black'");
+        System.out.println("Input colour( like 'red' or 'black')");
         String colour = "";
         java.util.Scanner scan = new java.util.Scanner(System.in);
         colour = scan.nextLine();
@@ -77,7 +81,8 @@ public class Circle {
     public String toString()
     {
         return  "Circle:" + "\n" +
-                "radius=" + this.radius + "\n" +
-                "colour=" + this.colour.definition + "\n";
+                "radius = " + this.radius + "\n" +
+                "colour = " + this.colour + "\n" +
+                "area = " + getArea();
     }
 }

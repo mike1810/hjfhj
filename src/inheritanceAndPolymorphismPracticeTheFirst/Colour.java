@@ -8,7 +8,7 @@ public enum Colour {
     L_BLUE("lite blue"),
     BLUE("blue");
 
-    public String definition;
+    private String definition;
 
     Colour(String colour){
         this.definition = colour;
@@ -41,6 +41,11 @@ public enum Colour {
             }
         }
         return check;
+    }
+
+    @Override
+    public String toString(){
+        return "Colour = " +definition;
     }
 
 }
