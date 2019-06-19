@@ -45,7 +45,7 @@ public enum Colour {
 
     @Override
     public String toString(){
-        return "Colour = " +definition;
+        return definition;
     }
 
 }

@@ -10,7 +10,6 @@ public class Demo {
         cylinder.inputRadius();
         cylinder.inputColour();
         System.out.println(cylinder);
-
-
+        System.out.println(cylinder.getRadius());
     }
 }

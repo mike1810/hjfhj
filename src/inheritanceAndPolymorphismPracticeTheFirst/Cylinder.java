@@ -23,6 +23,19 @@ public class Cylinder extends Circle {
         this.height = height;
     }
 
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        if(height >= 0) {
+            this.height = height;
+        }
+        else{
+            System.out.println("height less than zero");
+        }
+    }
+
     public double getVolume() {
         return super.getArea() * height;
     }
@@ -38,7 +51,8 @@ public class Cylinder extends Circle {
         return  "Cylinder:" + "\n" +
                 "radius = " + this.getRadius() + "\n" +
                 "colour = " + this.getColour() + "\n" +
-                "area = " + getArea();
+                "area = " + getArea() +
+                "volume = " + getVolume();
     }
 
 }
