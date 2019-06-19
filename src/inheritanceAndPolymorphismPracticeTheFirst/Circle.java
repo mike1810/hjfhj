@@ -12,8 +12,7 @@ public class Circle {
     }
 
     public Circle(double radius) {
-        this.radius = radius;
-        this.colour = Colour.BLACK;
+        this(radius, Colour.BLACK);
     }
 
     public Circle(double radius, Colour colour) {
