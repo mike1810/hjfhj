@@ -20,8 +20,11 @@ public class Demo {
         System.out.println(circle);
         System.out.println(rectangle);
         System.out.println(square);
-
         Shape[] shapeArray = new Shape[]{circle,rectangle, square};
+        printAreaOrPerimeter(shapeArray);
+
+    }
+    public static void printAreaOrPerimeter(Shape[] shapeArray){
         for(Shape shape: shapeArray){
             if( shape instanceof Circle){
                 System.out.println("Circle area: " + ((Circle) shape).getArea());
@@ -33,5 +36,6 @@ public class Demo {
                 System.out.print("\nSquare perimeter: " + ((Square) shape).getPerimeter());
             }
         }
+
     }
 }
