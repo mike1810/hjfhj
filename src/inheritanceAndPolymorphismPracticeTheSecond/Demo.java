@@ -27,10 +27,10 @@ public class Demo {
                 System.out.println("Circle area: " + ((Circle) shape).getArea());
             }
             if( shape instanceof Rectangle){
-                System.out.print("Rectangle perimeter: " + ((Rectangle) shape).getPerimeter());
+                System.out.print("\nRectangle perimeter: " + ((Rectangle) shape).getPerimeter());
             }
             if( shape instanceof Square){
-                System.out.print("Square perimeter: " + ((Square) shape).getPerimeter());
+                System.out.print("\nSquare perimeter: " + ((Square) shape).getPerimeter());
             }
         }
     }
