@@ -38,23 +38,23 @@ public class Math {
         return min;
     }
 
-    public static int nextAfter(int[] inIntArray, int This){
+    public static int nextAfter(int[] inIntArray, int compared){
         int maxInIntArray = max(inIntArray);
-        if(maxInIntArray <= This){ return 0; }
+        if(maxInIntArray <= compared){ return 0; }
         int minNextAfterThis = maxInIntArray;
         for(int value : inIntArray){
-            if(value > This & value < minNextAfterThis)
+            if(value > compared & value < minNextAfterThis)
                 minNextAfterThis = value;
         }
         return minNextAfterThis;
     }
 
-    public static double nextAfter(double[] inDoubleArray, double This){
+    public static double nextAfter(double[] inDoubleArray, double compared){
         double maxInDoubleArray = max(inDoubleArray);
-        if(maxInDoubleArray <= This){ return 0; }
+        if(maxInDoubleArray <= compared){ return 0; }
         double minNextAfterThis = maxInDoubleArray;
         for(double value : inDoubleArray){
-            if(value > This & value < minNextAfterThis)
+            if(value > compared & value < minNextAfterThis)
                 minNextAfterThis = value;
         }
         return minNextAfterThis;
