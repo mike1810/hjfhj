@@ -1,5 +1,4 @@
 package inheritanceAndPolymorphismPracticeTheFirst;
-import java.lang.Math;
 
 public class Circle {
 
@@ -7,7 +6,7 @@ public class Circle {
     private Colour colour;
 
     public Circle() {
-        this.radius = 0.0;
+        this.radius = 1.0;
         this.colour = Colour.BLACK;
     }
 
@@ -15,9 +14,9 @@ public class Circle {
         this(radius, Colour.BLACK);
     }
 
-    public Circle(double radius, Colour colour) {
-        this.radius = radius;
-        this.colour = colour;
+    public Circle(double radius, Colour color) {
+        setRadius(radius);
+        this.colour = color;
     }
 
     public double getRadius() {
@@ -25,16 +24,16 @@ public class Circle {
     }
 
     public void setRadius(double radius) {
-        if(radius >= 0) {
+        if(radius > 0) {
             this.radius = radius;
         }
         else{
-            System.out.println("radius less than zero");
+            System.out.println("inputted radius not above zero");
         }
     }
 
-    public void inputRadius() {
-        System.out.println("Input radius( like 0 or 0,213)");
+    void inputRadius() {
+        System.out.println("Input radius( like 1 or 0,213)");
         java.util.Scanner scan = new java.util.Scanner(System.in);
         try {
             String userRadius = scan.next();
@@ -54,6 +53,14 @@ public class Circle {
         return this.colour;
     }
 
+    public void setColour(Colour colour) {
+        if(Colour.checkColour(colour.getDefinition())) {
+            this.colour = colour;
+        } else {
+            System.out.println("Colour can`t be like this");
+        }
+    }
+
     public void setColour(String colour) {
         if(Colour.checkColour(colour)) {
             this.colour = Colour.getColour(colour);
@@ -62,7 +69,7 @@ public class Circle {
         }
     }
 
-    public void inputColour() {
+    void inputColour() {
         System.out.println("Input colour( like 'red' or 'black')");
         String colour;
         java.util.Scanner scan = new java.util.Scanner(System.in);
@@ -76,6 +83,6 @@ public class Circle {
         return  "Circle:" + "\n" +
                 "radius = " + this.radius + "\n" +
                 "colour = " + this.colour + "\n" +
-                "area = " + getArea();
+                "area = " + getArea() + " m2";
     }
 }

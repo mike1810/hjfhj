@@ -1,9 +1,8 @@
-package inheritanceAndPolymorphismPracticeTheFirst;
+package inheritanceAndPolymorphismPracticeTheSecond;
 
 public enum Colour {
     RED("red"),
     ORANGE("orange"),
-    WHITE("white"),
     GREEN("green"),
     BLACK("black"),
     L_BLUE("lite blue"),

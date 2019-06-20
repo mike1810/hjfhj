@@ -52,12 +52,11 @@ public class TurtleGraphics {
         turtleGraphicsBoardInit();
     }
     protected void showBoard(){
-        for(int i = 0; i < board.length; i++){
-        for(int j = 0; j < board[i].length; j++)
-        {
-            out.print(board[i][j] + " ");
-        }
-        out.println();
+        for (char[] chars : board) {
+            for (int j = 0; j < chars.length; j++) {
+                out.print(chars[j] + " ");
+            }
+            out.println();
         }
     }
     protected void movePen(Direction dir, int userSteps){

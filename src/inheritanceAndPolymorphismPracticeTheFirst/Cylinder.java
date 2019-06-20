@@ -5,7 +5,7 @@ public class Cylinder extends Circle {
 
     public Cylinder() {
         super();
-        this.height = 0.0;
+        this.height = 1.0;
     }
 
     public Cylinder(double height) {
@@ -28,16 +28,16 @@ public class Cylinder extends Circle {
     }
 
     public void setHeight(double height) {
-        if(height >= 0) {
+        if(height > 0) {
             this.height = height;
         }
         else{
-            System.out.println("height less than zero");
+            System.out.println("inputted height not above zero");
         }
     }
 
-    public void inputHeight(){
-        System.out.println("Input height( like 0 or 0,213)");
+    void inputHeight(){
+        System.out.println("Input height( like 1 or 0,213)");
         java.util.Scanner scan = new java.util.Scanner(System.in);
         try {
             String userHeight = scan.nextLine();
@@ -64,7 +64,7 @@ public class Cylinder extends Circle {
         return  "Cylinder:" + "\n" +
                 "radius = " + this.getRadius() + "\n" +
                 "colour = " + this.getColour() + "\n" +
-                "area = " + getArea() + "\n" +
-                "volume = " + getVolume();
+                "area = " + getArea() + " m2\n" +
+                "volume = " + getVolume() + " m3";
     }
 }

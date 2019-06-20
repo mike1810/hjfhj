@@ -1,6 +1,7 @@
 package inheritanceAndPolymorphismPracticeTheFirst;
 
 public class Demo {
+
     public static void main(String[] args){
         Circle circle = new Circle();
         circle.inputRadius();
