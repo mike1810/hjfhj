@@ -28,14 +28,16 @@ public class Demo {
         for(Shape shape: shapeArray){
             if( shape instanceof Circle){
                 System.out.println("Circle area: " + ((Circle) shape).getArea());
-            }
-            if( shape instanceof Rectangle){
-                System.out.print("\nRectangle perimeter: " + ((Rectangle) shape).getPerimeter());
+                continue;
             }
             if( shape instanceof Square){
                 System.out.print("\nSquare perimeter: " + ((Square) shape).getPerimeter());
+                continue;
+            }
+            if( shape instanceof Rectangle){
+                System.out.print("\nRectangle perimeter: " + ((Rectangle) shape).getPerimeter());
+                continue;
             }
         }
-
     }
 }
