@@ -4,11 +4,14 @@ import java.util.Scanner;
 import static java.lang.System.*;
 
 public class TurtleGraphicsDemo {
+
     public static void main(String[] args) {
+
         TurtleGraphics turtle1;
         turtle1 = turtleGraphicsBoardInit();
         playTurtle(turtle1);
     }
+
     public static TurtleGraphics turtleGraphicsBoardInit(){
         Scanner scan = new Scanner(in);
         int width, height, userPenPositionX = 0, userPenPositionY = 0;
@@ -67,6 +70,7 @@ public class TurtleGraphicsDemo {
             userLearned = true;
         }
     }
+
     public static int getMoveSteps(){
         Scanner scan = new Scanner(in);
         int moveSteps;
@@ -85,5 +89,4 @@ public class TurtleGraphicsDemo {
         }
         return moveSteps;
     }
-
 }

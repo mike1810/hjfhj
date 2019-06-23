@@ -12,22 +12,126 @@ public class MovableRectangle implements IMovable{
 
     MovableRectangle(MovablePoint topLeft, MovablePoint bottomRight){
         if(topLeft.isLeftAndTopAbove(bottomRight)){
-            setTopLeft(topLeft);
+            setTopLeftConstructor(topLeft);
             setBottomRight(bottomRight);
             if(!this.topLeft.speedEquals(this.bottomRight)){
-                do{
                     inputSpeed();
-                }
-                while(this.topLeft.getXSpeed()<=0);
             }
-        }else{
-            System.out.println("Check coordinates to be correct if you need a new rectangle:");
-            System.out.println("Top-Left " + topLeft + "\n" + "Bottom-Right "+ bottomRight);
+        }
+        else{makePointsCorrectToCreateRectangle(topLeft,bottomRight);
         }
     }
 
-    public void inputSpeed(){
-        System.out.println("Input speed of rectangle moving:");
+    private static void makeTopLeftCorrectToCreateRectangle(MovablePoint topLeft, MovablePoint bottomRight){
+        int leftXGoRightAndRightXGoLeft = 0;
+        int topXGoBottomAndBottomXGoTop = 0;
+        if(!topLeft.isLeftAndTopAbove(bottomRight)){
+            while(!topLeft.isLeftAndTopAbove(bottomRight)){
+                if(topLeft.getX() >= bottomRight.getX()){
+                    topLeft.setX(topLeft.getX() - topLeft.getXSpeed());
+                    leftXGoRightAndRightXGoLeft++;
+                }
+                if(topLeft.getY() <= bottomRight.getY()) {
+                    topLeft.setY(topLeft.getY() + topLeft.getYSpeed());
+                    topXGoBottomAndBottomXGoTop++;
+                }
+            }
+        }
+        if(leftXGoRightAndRightXGoLeft !=0) {
+            System.out.println(
+                    "Top-Left X decreased by '" + topLeft.getXSpeed() +
+                            "' '" + leftXGoRightAndRightXGoLeft + "' times;");
+        }
+        if(topXGoBottomAndBottomXGoTop != 0){
+            System.out.println(
+                    "Top-Left Y increased by '" + topLeft.getYSpeed() +
+                            "' '" + topXGoBottomAndBottomXGoTop +"' times;");
+        }
+    }
+
+    private static void makeBottomRightCorrectToCreateRectangle(MovablePoint topLeft, MovablePoint bottomRight){
+        int leftXGoRightAndRightXGoLeft = 0;
+        int topXGoBottomAndBottomXGoTop = 0;
+        if(!topLeft.isLeftAndTopAbove(bottomRight)){
+            while(!topLeft.isLeftAndTopAbove(bottomRight)){
+                if(topLeft.getX() >= bottomRight.getX()){
+                    bottomRight.setX(bottomRight.getX() + bottomRight.getXSpeed());
+                    leftXGoRightAndRightXGoLeft++;
+                }
+                if(topLeft.getY() <= bottomRight.getY()) {
+                    bottomRight.setY(bottomRight.getY() - bottomRight.getYSpeed());
+                    topXGoBottomAndBottomXGoTop++;
+                }
+            }
+        }
+        if(leftXGoRightAndRightXGoLeft !=0) {
+            System.out.println(
+                    "Bottom-Right X increased by '" + bottomRight.getXSpeed() +
+                            "' '" + leftXGoRightAndRightXGoLeft + "' times;");
+        }
+        if(topXGoBottomAndBottomXGoTop != 0){
+            System.out.println(
+                    "Bottom-Right X decreased by '" + bottomRight.getYSpeed() +
+                            "' '" + topXGoBottomAndBottomXGoTop +"' times;");
+        }
+    }
+
+    private static void makePointsCorrectToCreateRectangle(MovablePoint topLeft, MovablePoint bottomRight){
+        int leftXGoRightAndRightXGoLeft = 0;
+        int topXGoBottomAndBottomXGoTop = 0;
+        if(!topLeft.isLeftAndTopAbove(bottomRight)){
+            while(!topLeft.isLeftAndTopAbove(bottomRight)){
+                if(topLeft.getX() >= bottomRight.getX()){
+                    topLeft.setX(topLeft.getX() - topLeft.getXSpeed());
+                    bottomRight.setX(bottomRight.getX() + bottomRight.getXSpeed());
+                    leftXGoRightAndRightXGoLeft++;
+                }
+                if(topLeft.getY() <= bottomRight.getY()) {
+                    topLeft.setY(topLeft.getY() + topLeft.getYSpeed());
+                    bottomRight.setY(bottomRight.getY() - bottomRight.getYSpeed());
+                    topXGoBottomAndBottomXGoTop++;
+                }
+            }
+        }
+        if(leftXGoRightAndRightXGoLeft !=0) {
+            System.out.println(
+                    "Top-Left X decreased by '" + topLeft.getXSpeed() +
+                            "' '" + leftXGoRightAndRightXGoLeft + "' times;");
+            System.out.println(
+                    "Bottom-Right X increased by '" + bottomRight.getXSpeed() +
+                            "' '" + leftXGoRightAndRightXGoLeft + "' times;");
+        }
+        if(topXGoBottomAndBottomXGoTop != 0){
+            System.out.println(
+                    "Top-Left Y increased by '" + topLeft.getYSpeed() +
+                            "' '" + topXGoBottomAndBottomXGoTop +"' times;");
+            System.out.println(
+                    "Bottom-Right X decreased by '" + bottomRight.getYSpeed() +
+                            "' '" + topXGoBottomAndBottomXGoTop +"' times;");
+        }
+    }
+
+    static void createPointsNiceToCreateRectangle(MovablePoint topLeft, MovablePoint bottomRight){
+        System.out.println("\nYou can`t create rectangle with this points cause of:");
+        if(topLeft.getX() >= bottomRight.getX()){
+            System.out.println(
+                    "Top-Left X > Bottom-Right X (" +
+                            topLeft.getX() + ">=" + bottomRight.getX() +")");
+        }
+        if(topLeft.getY() <= bottomRight.getY()) {
+            System.out.println(
+                    "Top-Left Y < Bottom-Right Y (" +
+                            topLeft.getY() + "<=" + bottomRight.getY() + ")");
+        }
+        System.out.println();
+        makeTopLeftCorrectToCreateRectangle(topLeft, bottomRight);
+        makeBottomRightCorrectToCreateRectangle(topLeft, bottomRight);
+
+        //makePointsCorrectToCreateRectangle(topLeft, bottomRight);
+    }
+
+    private void inputSpeed(){
+        System.out.println("Input speed of rectangle moving(one speed value for all coordinates):");
         java.util.Scanner scan = new java.util.Scanner(System.in);
         try {
             String userSpeed = scan.next();
@@ -35,39 +139,93 @@ public class MovableRectangle implements IMovable{
             setSpeed(speed);
         }
         catch(NumberFormatException ex){
-            System.out.println("Invalid speed value");
+            System.out.print("Invalid speed value. ");
+            inputSpeed();
         }
 
     }
 
-    public void setTopLeft(MovablePoint topLeft) {
-//        if(this.bottomRight.getX() <= topLeft.getX() && this.bottomRight.getY() >= topLeft.getY()){
-//            System.out.println("Top-Left point must be to the left and higher than the Bottom-Right");
-//        }else{
+    void setTopLeftConstructor(MovablePoint topLeft) {
+        this.topLeft = topLeft;
+    }
+
+    void setTopLeft(MovablePoint topLeft) {
+        if(topLeft.isLeftAndTopAbove(bottomRight)){
             this.topLeft = topLeft;
-//        }
-    }
-
-    public void setBottomRight(MovablePoint bottomRight) {
-//        if(this.topLeft.getX() >= bottomRight.getX() && this.topLeft.getY() <= bottomRight.getY()){
-//            System.out.println("Bottom-Right point must be to the right and lower than the Top-Left");
-//        }else{
-            this.bottomRight = bottomRight;
-//        }
-    }
-
-    public void setSpeed( double speed){
-        if(speed <= 0){
-            System.out.println("Speed can`t be 0 or less than 0");
         }else{
-            bottomRight.setX(speed);
-            bottomRight.setY(speed);
-            topLeft.setX(speed);
-            topLeft.setX(speed);
+            makeTopLeftCorrectToCreateRectangle(topLeft, bottomRight);
+            this.topLeft = topLeft;
+        }
+        if(!topLeft.speedEquals(bottomRight)){
+            inputSpeed();
         }
     }
-/*
 
+    void setBottomRight(MovablePoint bottomRight) {
+        if(topLeft.isLeftAndTopAbove(bottomRight)){
+            this.bottomRight = bottomRight;
+        }else{
+            makeTopLeftCorrectToCreateRectangle(topLeft, bottomRight);
+            this.bottomRight = bottomRight;
+        }
+        if(!topLeft.speedEquals(bottomRight)){
+            inputSpeed();
+        }
+    }
+
+    void setSpeed( double speed){
+        if(speed <= 0){
+            System.out.println("Speed '" + speed + "' replaced by '" + (-speed) + "cause of negative speed value");
+            bottomRight.setXSpeed(-speed);
+            bottomRight.setYSpeed(-speed);
+            topLeft.setXSpeed(-speed);
+            topLeft.setYSpeed(-speed);
+        }else{
+            bottomRight.setXSpeed(speed);
+            bottomRight.setYSpeed(speed);
+            topLeft.setXSpeed(speed);
+            topLeft.setYSpeed(speed);
+        }
+    }
+
+    MovablePoint getBottomRight() {
+        return bottomRight;
+    }
+
+    MovablePoint getTopLeft() {
+        return topLeft;
+    }
+
+    double getRectangleSpeed(){
+        return topLeft.getXSpeed();
+    }
+
+    public void moveUp(){
+        this.bottomRight.setY(this.bottomRight.getY() + bottomRight.getYSpeed());
+        this.topLeft.setY(this.topLeft.getY() + topLeft.getYSpeed());
+    }
+
+    public void moveDown(){
+        this.bottomRight.setY(this.bottomRight.getY() - bottomRight.getYSpeed());
+        this.topLeft.setY(this.topLeft.getY() - topLeft.getYSpeed());
+    }
+
+    public void moveLeft(){
+        bottomRight.setX(bottomRight.getX() - bottomRight.getXSpeed());
+        topLeft.setX(topLeft.getX() - topLeft.getXSpeed());
+    }
+
+    public void moveRight(){
+        bottomRight.setX(bottomRight.getX() + bottomRight.getXSpeed());
+        topLeft.setX(topLeft.getX() + topLeft.getXSpeed());
+    }
+
+    @Override
+    public String toString(){
+        return "Top-Left " + topLeft + "Bottom-Right " + bottomRight;
+    }
+
+/*
     MovableRectangle(double squareSide, double squareCentreX,  double squareCentreY, double pointSpeed){
         setTopLeftWhenRectangleIsSquare(squareSide,squareCentreX,squareCentreY,pointSpeed);
     }
@@ -101,38 +259,5 @@ public class MovableRectangle implements IMovable{
                 pointSpeed,
                 pointSpeed);
     }
-
 */
-
-
-
-    public MovablePoint getBottomRight() {
-        return bottomRight;
-    }
-
-    public MovablePoint getTopLeft() {
-        return topLeft;
-    }
-
-
-    public void moveUp(){
-        this.bottomRight.setY(this.bottomRight.getY() + bottomRight.getYSpeed());
-        this.topLeft.setY(this.topLeft.getY() + topLeft.getYSpeed());
-    }
-
-    public void moveDown(){
-        this.bottomRight.setY(this.bottomRight.getY() - bottomRight.getYSpeed());
-        this.topLeft.setY(this.topLeft.getY() - topLeft.getYSpeed());
-    }
-
-    public void moveLeft(){
-        bottomRight.setX(bottomRight.getX() - bottomRight.getXSpeed());
-        topLeft.setX(topLeft.getX() - topLeft.getXSpeed());
-    }
-
-    public void moveRight(){
-        bottomRight.setX(bottomRight.getX() + bottomRight.getXSpeed());
-        topLeft.setX(topLeft.getX() + topLeft.getXSpeed());
-    }
-
 }

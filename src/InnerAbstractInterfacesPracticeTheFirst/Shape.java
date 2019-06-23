@@ -41,9 +41,9 @@ public abstract class Shape {
                 isRectangle = true;
             }
         }
-        if(isCircle){System.out.println("What colour u need to paint circle? (input like 'red' or 'black')");}
-        if(isSquare){System.out.println("What colour u need to paint square? (input like 'red' or 'black')");}
-        if(isRectangle){System.out.println("What colour u need to paint rectangle? (input like 'red' or 'black')");}
+        if(isCircle){System.out.print("What colour u need to paint circle? (input like 'red' or 'black')");}
+        if(isSquare){System.out.print("What colour u need to paint square? (input like 'red' or 'black')");}
+        if(isRectangle){System.out.print("What colour u need to paint rectangle? (input like 'red' or 'black')");}
 
         System.out.println();
         String colour;

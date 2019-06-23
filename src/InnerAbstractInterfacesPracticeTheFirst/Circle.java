@@ -46,6 +46,10 @@ public class Circle extends Shape{
     }
 
     public double getPerimeter() {
+        return getCurcumference();
+    }
+
+    public double getCurcumference() {
         return 2*radius*Math.PI;
     }
 
@@ -54,7 +58,7 @@ public class Circle extends Shape{
     }
 
     public boolean isInside( double x, double y ){
-        return Math.pow((x + y), 0.5) >= this.radius;
+        return Math.pow((Math.pow(x,2) + Math.pow(y,2)), 0.5) <= this.radius;
     }
 
     @Override

@@ -37,7 +37,7 @@ public final class MovablePoint implements IMovable {
         return xSpeed;
     }
 
-    public void setXSpeed(double xSpeed) {
+    void setXSpeed(double xSpeed) {
         if(xSpeed <= 0){
             System.out.println("Speed can`t be 0 or less than 0");
             this.xSpeed = 0;
@@ -45,14 +45,13 @@ public final class MovablePoint implements IMovable {
         this.xSpeed = xSpeed;
     }
 
-    public double getYSpeed() {
+    double getYSpeed() {
         return ySpeed;
     }
 
-    public void setYSpeed(double ySpeed) {
+    void setYSpeed(double ySpeed) {
         if(ySpeed <= 0){
             System.out.println("Speed can`t be 0 or less than 0");
-            this.ySpeed = 0;
         }
         this.ySpeed = xSpeed;
     }
@@ -73,7 +72,7 @@ public final class MovablePoint implements IMovable {
         this.x += xSpeed;
     }
 
-    public boolean isLeftAndTopAbove(MovablePoint obj) {
+    boolean isLeftAndTopAbove(MovablePoint obj) {
         if(this.x < obj.x && this.y > obj.y){
             return true;
         }else{
@@ -81,12 +80,30 @@ public final class MovablePoint implements IMovable {
         }
     }
 
-    public boolean speedEquals(MovablePoint obj) {
+    boolean speedEquals(MovablePoint obj) {
         if(this.xSpeed == obj.xSpeed && this.ySpeed == obj.ySpeed && this.xSpeed == this.ySpeed){
             return true;
         }else{
             return false;
         }
+    }
+
+    public static void printPoints(MovablePoint topLeft,MovablePoint bottomRight){
+        System.out.println(
+                "Top-Left " + topLeft +
+                        " with xSpeed = " + topLeft.getXSpeed() +
+                        " with wSpeed = " + topLeft.getYSpeed() +
+                        "\nBottom-Right " + bottomRight +
+                        " with xSpeed = " + bottomRight.getXSpeed() +
+                        " with wSpeed = " + bottomRight.getYSpeed());
+    }
+
+    public static double returnNewCoordinate(){
+        return (int)(Math.random()*50)-25;
+    }
+
+    public static double returnNewSpeed(){
+        return (int)(Math.random()*5+1);
     }
 
     @Override
