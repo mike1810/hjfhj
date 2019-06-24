@@ -306,7 +306,7 @@ public class MineSweeper {
     }
 
     void penMarkBomb(){
-        board[penPosition.getX()][penPosition.getY()] = markedCellChar;
+        board[penPosition.getY()][penPosition.getX()] = markedCellChar;
     }
 
     void moveLeft(){
