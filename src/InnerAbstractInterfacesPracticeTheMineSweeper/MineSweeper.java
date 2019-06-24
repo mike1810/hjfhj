@@ -5,11 +5,14 @@ import static java.lang.System.*;
 public class MineSweeper {
 
     private char[][] board;// user board
-    private char openedBoard[][];//user-hidden bombs board
+    private char[][] openedBoard;//user-hidden bombs board
+
     private Position penPosition;
     private int Bombs;
 
-    private boolean cellIsBomb[][];
+    private boolean[][] cellIsBomb;
+    private boolean[][] cellIsOpened;
+
     private int boardWidth;
     private int boardHeight;
     private char closedChar;//'.'
@@ -23,10 +26,6 @@ public class MineSweeper {
         this.markedCellChar = 'X';
         this.penChar = 'I';
         this.markedPenCellChar = 'Ж';
-        this.board = new char[MineSweeperDemo.EASY_WIDTH][MineSweeperDemo.EASY_HEIGHT];
-        this.board = new char[MineSweeperDemo.EASY_WIDTH][MineSweeperDemo.EASY_HEIGHT];
-        this.cellIsBomb = randomizeBomb();
-        this.mineSweeperBoardInit();
     }
 
     MineSweeper(){
@@ -39,28 +38,30 @@ public class MineSweeper {
         this.boardHeight = height;
         this.penPosition = new Position(boardHeight/2, boardWidth/2);
         board = new char[height][width];
-        openedBoard = new char[height][width];
-        this.cellIsBomb = randomizeBomb();
+        cellIsOpened = new boolean[height][width];
+        //openedBoard = new char[height][width];
+
         mineSweeperBoardInit();
+        randomizeBomb();
+        mineSweeperCellIsOpenedInit();
+        miNeSweeperOpenedBoardInit();
     }
 
-    private boolean[][] randomizeBomb(){
-        boolean[][] bombBoard = new boolean[board[0].length][board.length];
-        initializeBobmCells(bombBoard);
+    private void randomizeBomb(){
+        this.cellIsBomb = new boolean[boardHeight][boardWidth];
+        initializeBobmCells(this.cellIsBomb);
 
         do {
-            int width = (int)(Math.random()*board.length);
-            int height = (int)(Math.random()*board[0].length);
-            bombBoard[width][height] = true;
+            int width = (int)(Math.random()*boardWidth);
+            int height = (int)(Math.random()*boardHeight);
+            cellIsBomb[height][width] = true;
         }
         while(checkInstalledBobmQuantity() < Bombs);
-
-        return bombBoard;
     }
 
     private void initializeBobmCells( boolean[][] bombBoard){
-        for(int i = 0; i < bombBoard.length; i++)
-            for(int j = 0; j < bombBoard[i].length; j++)
+        for(int i = 0; i < boardHeight; i++)
+            for(int j = 0; j < boardWidth; j++)
                 bombBoard[i][j] = false;
     }
 
@@ -95,21 +96,18 @@ public class MineSweeper {
         return '0';
     }
 
-
     private int checkInstalledBobmQuantity(){
             int installedBombs = 0;
-            for(int i = 0; i < cellIsBomb.length; i++) {
-                for(int j = 0; j < cellIsBomb[i].length; j++) {
-                    if(cellIsBomb[i][j] == true) installedBombs++;
+            for(int i = 0; i < boardHeight; i++) {
+                for(int j = 0; j < boardWidth; j++) {
+                    if(cellIsBomb[i][j]) installedBombs++;
                 }
             }
             return installedBombs;
         }
 
-
-
     protected void getPosition(){
-        out.println("Turtle position is: "+ penPosition.getX()+" column, " + penPosition.getY() + " row.");
+        out.println("MineSweeper position is: "+ (penPosition.getX() + 1)+" column, " + (penPosition.getY() + 1) + " row.");
     }
 
     protected void turtleGraphicsBoardInit(int height, int width, int penPositionX, int penPositionY){
@@ -132,23 +130,72 @@ public class MineSweeper {
         board[penPosition.getX()][penPosition.getY()] = penChar;
     }
 
-    protected void clearBoard(){
+    private void mineSweeperCellIsOpenedInit(){
+        for(int i = 0; i < cellIsOpened.length; i++)
+            for (int j = 0; j < cellIsOpened[i].length; j++) {
+                cellIsOpened[i][j] = false;
+            }
+    }
+
+    private void miNeSweeperOpenedBoardInit(){
+        openedBoard = new char [boardHeight][boardWidth];
+        for(int h = 0; h < openedBoard.length; h++){
+            for(int w = 0; w < openedBoard[h].length; w++){
+                openedBoard[h][w] = checkBombs(cellIsBomb, h, w);
+            }
+        }
+    }
+
+    public void printCellIsBomb() {
+
+        for (boolean[] bombBoardLine : cellIsBomb) {
+            for (boolean bombCell : bombBoardLine) {
+                System.out.print(bombCell + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void printOpenedBoard() {
+
+        for (char[] openedBombBoardLine : openedBoard) {
+            for (char bombCell : openedBombBoardLine) {
+                System.out.print(bombCell + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    void clearBoard(){
         penPosition.setX(0);
         penPosition.setY(0);
         mineSweeperBoardInit();
     }
 
-    protected void showBoard(){
-        for (char[] chars : board) {
+    void showBoard(){
+
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i].length; j++)
+            {
+                if (i == penPosition.getX() && j == penPosition.getY()) {
+                    out.print("<" + board[i][j] + ">");
+                } else {
+                    out.print(" " + board[i][j] + " ");
+                }
+            }
+            out.println( );
+        }
+
+   /*     for (char[] chars : board) {
             for (char aChar : chars) {
                 out.print(aChar + " ");
             }
             out.println( );
-        }
+        }*/
     }
 
-    protected void movePen(Direction dir){
-        int realSteps = 1;//1 - only one step in any direction we can do
+    void movePen(Direction dir){
+        int realSteps = 1;
         switch(dir.code){
             case 'u':
                 realSteps = (this.penPosition.getX() - realSteps < 0) ? this.penPosition.getX() : realSteps;
@@ -171,18 +218,17 @@ public class MineSweeper {
         }
     }
 
-    public void penCheckBomb(){
+    void penCheckBomb(){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
 
+        if(openedBoard[posY][posX] != '@'){
 
+        }
 
     }
 
-
-
-
-    public void penMarkBomb(){
+    void penMarkBomb(){
         board[penPosition.getX()][penPosition.getY()] = markedPenCellChar;
     }
 

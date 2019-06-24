@@ -9,8 +9,8 @@ public class BooleanMagic {
         printBoolean(bombBoard);
 
         do {
-            int xBomb = (int)(Math.random()*(Height-1));
-            int yBomb = (int)(Math.random()*(Width-1));
+            int xBomb = (int)(Math.random()*(Height));
+            int yBomb = (int)(Math.random()*(Width));
             System.out.println("BombLine = " + (xBomb+1) + " BombCol = " + (yBomb+1));
             bombBoard[xBomb][yBomb] = true;
             System.out.println(checkInstalledBobmQuantity(bombBoard));
@@ -74,7 +74,7 @@ public class BooleanMagic {
         return installedBombs;
     }
 
-    private static void printBoolean(boolean[][] bombBoard) {
+    public static void printBoolean(boolean[][] bombBoard) {
         for (boolean[] bombBoardLine : bombBoard) {
             for (boolean bombCell : bombBoardLine) {
                 System.out.print(bombCell + " ");
@@ -82,7 +82,7 @@ public class BooleanMagic {
             System.out.println();
         }
     }
-    private static void printChar(char[][] openedBombBoard) {
+    public static void printChar(char[][] openedBombBoard) {
         for (char[] openedBombBoardLine : openedBombBoard) {
             for (char bombCell : openedBombBoardLine) {
                 System.out.print(bombCell + " ");

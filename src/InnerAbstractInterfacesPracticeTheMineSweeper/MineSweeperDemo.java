@@ -16,9 +16,10 @@ public class MineSweeperDemo {
     static final int HARD_BOMBS = 100;
 
     public static void main(String[] args) {
-//        ХIЖ
         MineSweeper mineSweeper;
         mineSweeper = mineSweeperBoardInit();
+        //mineSweeper.printCellIsBomb();
+        //mineSweeper.printOpenedBoard();
         playMineSweeper(mineSweeper);
     }
 
@@ -48,23 +49,16 @@ public class MineSweeperDemo {
         }
 
         if(difficulty == 1){
-            width = EASY_WIDTH;
-            height = EASY_HEIGHT;
-            bombs = EASY_BOMBS;
+            width = EASY_WIDTH; height = EASY_HEIGHT; bombs = EASY_BOMBS;
         }
         if(difficulty == 2){
-            width = MEDIUM_WIDTH;
-            height = MEDIUM_HEIGHT;
-            bombs = MEDIUM_BOMBS;
+            width = MEDIUM_WIDTH; height = MEDIUM_HEIGHT; bombs = MEDIUM_BOMBS;
         }
         if(difficulty == 3){
-            width = HARD_WIDTH;
-            height = HARD_HEIGHT;
-            bombs = HARD_BOMBS;
+            width = HARD_WIDTH; height = HARD_HEIGHT; bombs = HARD_BOMBS;
         }
 
         MineSweeper mineSweeper = new MineSweeper(height, width, bombs);
-        mineSweeper.getPosition();
         return mineSweeper;
     }
 
