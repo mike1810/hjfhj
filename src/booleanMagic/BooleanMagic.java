@@ -25,6 +25,42 @@ public class BooleanMagic {
             }
         }
         printChar(openedBoard);
+
+        for(int i = 0; i < Height; i++){
+            for(int j = 0; j < Width; j++)
+            {
+                if(openedBoard[i][j] == ' '){
+                    openedBoard[i][j] = '0';
+                }
+            }
+        }
+        printChar(openedBoard);
+        System.out.println();
+
+
+        for(int i = 0; i < Height; i++){
+            for(int j = 0; j < Width; j++)
+            {
+                if(openedBoard[i][j] == '0'){
+                    replace(openedBoard, i, j);
+                }
+            }
+        }
+        printChar(openedBoard);
+    }
+
+    private static void replace(char[][] openedBoard ,int i, int j){
+        if(openedBoard[i][j] == '0'){
+            openedBoard[i][j] = ' ';
+            if(i-1 > 0 && j - 1 > 0) {replace(openedBoard, i - 1,j - 1);}
+            if(i-1 > 0 ) {replace(openedBoard, i - 1,j);}
+            if(i-1 > 0 && j - 1 > 0) {replace(openedBoard, i - 1,j + 1);}
+            if(i-1 > 0 && j - 1 > 0) {replace(openedBoard, i + 1,j - 1);}
+            if(i-1 > 0 && j - 1 > 0) {replace(openedBoard, i + 1,j );}
+            if(i-1 > 0 && j - 1 > 0) {replace(openedBoard, i + 1,j + 1);}
+            if(i-1 > 0 && j - 1 > 0) {replace(openedBoard, i ,j - 1);}
+            if(i-1 > 0 && j - 1 > 0) {replace(openedBoard, i ,j + 1);}
+        }
     }
 
     private static char checkBombs(boolean [][] bombBoard, int hCell, int wCell) {

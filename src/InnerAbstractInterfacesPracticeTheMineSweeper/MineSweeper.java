@@ -5,20 +5,31 @@ import static java.lang.System.*;
 public class MineSweeper {
 
     private char[][] board;// user board
+
     private char[][] openedBoard;//user-hidden bombs board
 
     private Position penPosition;
+
     private int Bombs;
+
     private boolean youLose;
+
     private boolean youWin;
+
     private boolean[][] cellIsBomb;
+
     private boolean[][] cellIsOpened;
 
     private int boardWidth;
+
     private int boardHeight;
+
     private char closedChar;//'.'
+
     private char markedCellChar;//'X'
+
     private char markedPenCellChar;//'o'
+
     private char penChar;//'x'
 
     {
@@ -46,7 +57,7 @@ public class MineSweeper {
         mineSweeperBoardInit();
         randomizeBomb();
         mineSweeperCellIsOpenedInit();
-        miNeSweeperOpenedBoardInit();
+        mineSweeperOpenedBoardInit();
     }
 
     private void randomizeBomb(){
@@ -128,7 +139,7 @@ public class MineSweeper {
             }
     }
 
-    private void miNeSweeperOpenedBoardInit(){
+    private void mineSweeperOpenedBoardInit(){
         openedBoard = new char [boardHeight][boardWidth];
         for(int h = 0; h < openedBoard.length; h++){
             for(int w = 0; w < openedBoard[h].length; w++){
@@ -140,6 +151,16 @@ public class MineSweeper {
     public void printCellIsBomb() {
 
         for (boolean[] bombBoardLine : cellIsBomb) {
+            for (boolean bombCell : bombBoardLine) {
+                System.out.print(bombCell + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void printCellIsOpened() {
+
+        for (boolean[] bombBoardLine : cellIsOpened) {
             for (boolean bombCell : bombBoardLine) {
                 System.out.print(bombCell + " ");
             }
@@ -191,16 +212,19 @@ public class MineSweeper {
 
         if(openedBoard[posY][posX] != '0' && openedBoard[posY][posX] != '@'){
             board[posY][posX] = openedBoard[posY][posX];
-            cellIsOpened[posX][posY] = true;
+            cellIsOpened[posY][posX] = true;
         }
         if(openedBoard[posY][posX] == '@'){
             board[posY][posX] = '@';
-            cellIsOpened[posX][posY] = true;
+            cellIsOpened[posY][posX] = true;
             youLose = true;
             for(int i = 0; i < boardHeight; i++){
                 for(int j = 0; j < boardWidth; j++){
                     if(board[posY][posX] == 'X'){
                         board[posY][posX] = '*';
+                    }
+                    if(openedBoard[posY][posX] == '@'){
+                        board[posY][posX] = '@';
                     }
                 }
             }
@@ -214,10 +238,12 @@ public class MineSweeper {
                 if(openedBoard[posY - 1][posX - 1] != '0' && openedBoard[posY - 1][posX - 1] != '@'){
                     board[posY - 1][posX - 1] = openedBoard[posY - 1][posX - 1];
                     cellIsOpened[posY - 1][posX - 1] = true;
+
                 }
                 if(openedBoard[posY - 1][posX - 1] == '0'){
                     board[posY - 1][posX - 1] = ' ';
                     cellIsOpened[posY - 1][posX - 1] = true;
+                    penCheckBomb(new Position(posX - 1, posY - 1));
                 }
             }
             if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY+1][posX-1] == false){
@@ -229,6 +255,7 @@ public class MineSweeper {
                 if(openedBoard[posY + 1][posX - 1] == '0'){
                     board[posY + 1][posX - 1] = ' ';
                     cellIsOpened[posY + 1][posX - 1] = true;
+                    penCheckBomb(new Position(posX - 1, posY + 1));
                 }
             }
             if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY][posX-1] == false){
@@ -240,6 +267,7 @@ public class MineSweeper {
                 if(openedBoard[posY][posX - 1] == '0'){
                     board[posY][posX - 1] = ' ';
                     cellIsOpened[posY][posX - 1] = true;
+                    penCheckBomb(new Position(posX - 1, posY));
                 }
             }
             if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY-1][posX+1] == false){
@@ -251,6 +279,7 @@ public class MineSweeper {
                 if(openedBoard[posY - 1][posX + 1] == '0'){
                     board[posY - 1][posX + 1] = ' ';
                     cellIsOpened[posY - 1][posX + 1] = true;
+                    penCheckBomb(new Position(posX + 1, posY - 1));
                 }
             }
             if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY+1][posX+1] == false){
@@ -262,6 +291,7 @@ public class MineSweeper {
                 if(openedBoard[posY + 1][posX + 1] == '0'){
                     board[posY + 1][posX + 1] = ' ';
                     cellIsOpened[posY + 1][posX + 1] = true;
+                    penCheckBomb(new Position(posX + 1, posY + 1));
                 }
             }
             if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY][posX+1] == false){
@@ -273,6 +303,7 @@ public class MineSweeper {
                 if(openedBoard[posY][posX + 1] == '0'){
                     board[posY][posX + 1] = ' ';
                     cellIsOpened[posY][posX + 1] = true;
+                    penCheckBomb(new Position( posX + 1, posY));
                 }
             }
             if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY - 1][posX] == false){
@@ -284,6 +315,7 @@ public class MineSweeper {
                 if(openedBoard[posY - 1][posX] == '0'){
                     board[posY - 1][posX] = ' ';
                     cellIsOpened[posY - 1][posX] = true;
+                    penCheckBomb(new Position( posX, posY - 1));
                 }
             }
             if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY + 1][posX] == false){
@@ -295,14 +327,95 @@ public class MineSweeper {
                 if(openedBoard[posY + 1][posX] == '0'){
                     board[posY + 1][posX] = ' ';
                     cellIsOpened[posY + 1][posX] = true;
+                    penCheckBomb(new Position(posX, posY + 1));
                 }
             }
         }
+    }
 
+    void penCheckBomb2(Position a){
+        int posY = penPosition.getY();
+        int posX = penPosition.getX();
+
+        if(openedBoard[posY][posX] != '0' && openedBoard[posY][posX] != '@'){
+            board[posY][posX] = openedBoard[posY][posX];
+            cellIsOpened[posY][posX] = true;
+            return;
+        }
+
+        if(openedBoard[posY][posX] == '@'){
+            board[posY][posX] = '@';
+            cellIsOpened[posY][posX] = true;
+            youLose = true;
+            for(int i = 0; i < boardHeight; i++){
+                for(int j = 0; j < boardWidth; j++){
+                    if(board[posY][posX] == 'X'){
+                        board[posY][posX] = '*';
+                    }
+                    if(openedBoard[posY][posX] == '@'){
+                        board[posY][posX] = '@';
+                    }
+                }
+            }
+            return;
+        }
+
+        if(openedBoard[posY][posX] == '0'){
+            board[posY][posX] = ' ';
+            cellIsOpened[posY][posX] = true;
+            boolean flag = true;
+
+               /* if( posY+1 < boardHeight && !cellIsOpened[posY+1][posX]){
+                    penCheckBomb2(new Position(posX, posY+1));
+                }
+                if( posY+1 < boardHeight && posX + 1 < boardWidth && !cellIsOpened[posY+1][posX+1]){
+                    penCheckBomb2(new Position(posX+1, posY+1));
+                }
+                if( posX + 1 < boardWidth && !cellIsOpened[posY][posX+1]) {
+                    penCheckBomb2(new Position(posX + 1, posY));
+                }
+                if( posY-1 < boardHeight && posX + 1 < boardWidth && !cellIsOpened[posY-1][posX+1]){
+                penCheckBomb2(new Position(posX+1, posY-1));
+                }
+                if( posY + 1 < boardHeight && posX - 1 < boardWidth && !cellIsOpened[posY+1][posX-1]) {
+                    penCheckBomb2(new Position(posX - 1, posY + 1));
+                }
+                if( posX - 1 < boardWidth && !cellIsOpened[posY][posX-1]) {
+                    penCheckBomb2(new Position(posX - 1, posY));
+                }
+                if(posY-1 < boardHeight && posX - 1 < boardWidth && !cellIsOpened[posY-1][posX-1]){
+                    penCheckBomb2(new Position(posX-1, posY-1));
+                }
+                if(posY-1 < boardHeight && !cellIsOpened[posY-1][posX]) {
+                    penCheckBomb2(new Position(posX, posY - 1));
+                }*/
+        }
+        penCheckBomb2(new Position(posX, posY+1));
+        penCheckBomb2(new Position(posX+1, posY+1));
+        penCheckBomb2(new Position(posX + 1, posY));
+        penCheckBomb2(new Position(posX+1, posY-1));
+        penCheckBomb2(new Position(posX - 1, posY + 1));
+        penCheckBomb2(new Position(posX - 1, posY));
+        penCheckBomb2(new Position(posX-1, posY-1));
+        penCheckBomb2(new Position(posX, posY - 1));
+
+        return;
     }
 
     public boolean getYouLose(){
         return youLose;
+    }
+
+    public boolean getYouWin(){
+        youWin = true;
+        for(int i = 0; i < boardHeight; i++){
+            for(int j = 0; j < boardWidth; j++){
+                if(cellIsOpened[i][j] == cellIsBomb[i][j]){
+                    youWin = false;
+                }
+            }
+        }
+        return youWin;
     }
 
     void penMarkBomb(){

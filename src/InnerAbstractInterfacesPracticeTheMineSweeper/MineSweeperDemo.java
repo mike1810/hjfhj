@@ -23,7 +23,7 @@ public class MineSweeperDemo {
         MineSweeper mineSweeper;
         mineSweeper = mineSweeperBoardInit();
         //mineSweeper.printCellIsBomb();
-        mineSweeper.printOpenedBoard();
+        //mineSweeper.printOpenedBoard();
         playMineSweeper(mineSweeper);
     }
 
@@ -72,8 +72,11 @@ public class MineSweeperDemo {
         String moveOptionScan;
 
         boolean youlose = false;
-        while(!youlose){
-            if(mineSweeper.getYouLose()){
+        while(!youlose) {
+            //mineSweeper.printCellIsBomb();
+            //out.println("____________________________");
+            //mineSweeper.printCellIsOpened();
+            if (mineSweeper.getYouLose()) {
                 mineSweeper.showBoard();
                 out.println("You Lose");
                 youlose = mineSweeper.getYouLose();
@@ -82,7 +85,7 @@ public class MineSweeperDemo {
             else{
                 mineSweeper.showBoard();
                 //mineSweeper.getPosition();
-                out.println("Move : w(up), s(down), a(left), d(right), c(for clear board)");
+                out.println("Move : w(up), s(down), a(left), d(right), e(opencell), r(mark cell)");
                 moveOptionScan = scan.next();
                 char direction = moveOptionScan.charAt(0);
                 switch(direction){
@@ -92,12 +95,17 @@ public class MineSweeperDemo {
                     case 's': mineSweeper.moveDown(); break;
                     case 'r': mineSweeper.penMarkBomb(); break;
                     case 'e': mineSweeper.penCheckBomb(mineSweeper.getPosition()); break;
-                    case 'x': mineSweeper.clearBoard();  break;
                     default:
                         out.println("You don`t move like this: " + moveOptionScan);
                 }
             }
-        }
-    }
+            if (mineSweeper.getYouWin()){
+                    mineSweeper.showBoard();
+                    out.println("You Win");
+                    youlose = mineSweeper.getYouLose();
+                    mineSweeperGame();
 
-}
+            }
+        }
+
+}}
