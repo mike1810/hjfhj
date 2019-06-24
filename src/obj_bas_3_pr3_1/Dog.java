@@ -8,56 +8,68 @@ class Dog {
     private String name;
     private Size size;
     private int age;
+
     Dog(){
         this.name = giveDogName();
         this.size = giveDogSize();
         this.age = giveDogAge();
     }
+
     Dog(String name, Size size, int age){
         this.name = name;
         this.size = size;
         this.age = age;
     }
+
     Dog(Size size, int age){
         this("", size,age);
         this.name = giveDogName();
     }
+
     Dog(String name, Size size){
         this(name, size,0);
         this.age = giveDogAge();
     }
+
     Dog(String name, int age){
         this(name, Size.BIG ,age);
         this.size = giveDogSize();
     }
+
     Dog(Size size){
         this("", size, 0);
         this.name = giveDogName();
         this.age = giveDogAge();
     }
+
     Dog(String name){
         this(name, Size.BIG,0);
         this.size = giveDogSize();
         this.age = giveDogAge();
     }
+
     Dog(int age){
         this("", Size.BIG ,age);
         this.name = giveDogName();
         this.size = giveDogSize();
     }
+
     private static String giveDogName(){
         DogName [] dogNameArray = DogName.values();
         int dogNameIndex =  (int)(Math.random()*dogNameArray.length);
         return dogNameArray[dogNameIndex].code;
     }
+
     private static Size giveDogSize(){
         Size[] dogSizeArray = Size.values();
         int dogSizeIndex =  (int)(Math.random()*dogSizeArray.length);
         return dogSizeArray[dogSizeIndex];
     }
+
     private static int giveDogAge(){
         return (int)(Math.random()*20);
     }
+
     public void dogDetails(){
         out.println("Name: " + name + "; Size: " + size + "; Age: " + age);
     }
@@ -71,6 +83,7 @@ class Dog {
             this.forSorting = forSorting;
         }
     }
+
     private enum DogName{
         SHARIK("SHARIK"),
         TUZIK("TUZIK"),
@@ -82,6 +95,7 @@ class Dog {
             this.code = code;
         }
     }
+
     private static Boolean checkDogSize(String size){
         boolean check = false;
         Size[] types = Size.values();
@@ -92,6 +106,7 @@ class Dog {
         }
         return check;
     }
+
     private static Size returnEnumSize(String size){
         Size[] types = Size.values();
         for(Size enumSize: types){
@@ -101,6 +116,7 @@ class Dog {
         }
         return Size.BIG;
     }
+
     protected static void insertionSortingOfDogArrayByNameAsc( Dog [] dogArray){
         Dog temporary;
         for (int min = 0; min < dogArray.length - 1; min++) {
@@ -115,6 +131,7 @@ class Dog {
             dogArray[least] = temporary;
         }
     }
+
     protected static void insertionSortingOfDogArrayByNameDesc( Dog [] dogArray){
         insertionSortingOfDogArrayByNameAsc(dogArray);
         Dog[] temporary = new Dog[dogArray.length];
@@ -127,6 +144,7 @@ class Dog {
             dogArray[i] = temporary[i];
         }
     }
+
     protected static void insertionSortingOfDogArrayBySizeAsc( Dog [] dogArray){
         Dog temporary;
         for (int min = 0; min < dogArray.length - 1; min++) {
@@ -141,6 +159,7 @@ class Dog {
             dogArray[least] = temporary;
         }
     }
+
     protected static void insertionSortingOfDogArrayBySizeDesc( Dog [] dogArray){
         insertionSortingOfDogArrayBySizeAsc(dogArray);
         Dog[] temporary = new Dog[dogArray.length];
@@ -153,6 +172,7 @@ class Dog {
             dogArray[i] = temporary[i];
         }
     }
+
     protected static void insertionSortingOfDogArrayByAgeAsc( Dog [] dogArray){
         Dog temporary;
         for (int min = 0; min < dogArray.length - 1; min++) {
@@ -167,6 +187,7 @@ class Dog {
             dogArray[least] = temporary;
         }
     }
+
     protected static void insertionSortingOfDogArrayByAgeDesc( Dog [] dogArray){
         insertionSortingOfDogArrayByAgeAsc(dogArray);
         Dog[] temporary = new Dog[dogArray.length];
@@ -185,6 +206,7 @@ class Dog {
             dogArray[i].dogDetails();
         }
     }
+
     private static String inputDogName(){
         Scanner scan = new Scanner(in);
         String newDogName;
@@ -280,4 +302,32 @@ class Dog {
         int newDogAge = inputDogAge();//Указываем размер собаки}
         return new Dog(newDogName, newDogSize, newDogAge);//добавляем собаку с установленными значениями в массив
     }
+    /*
+    protected void inputDogFromString(String userSettings){
+        String[] userSettingsSplit = userSettings.split(" ");
+        boolean firstWordIsIntegerType = true;
+        int firstWord = 0;
+        try {
+            firstWord = Integer.parseInt(userSettingsSplit[0]);
+        }
+        catch(NumberFormatException ex){
+            firstWordIsIntegerType = false;
+        }
+        if(firstWord <= 0){
+            firstWordIsIntegerType = false;
+        }
+        out.println((firstWordIsIntegerType)?"Dogs array can be created":"Dogs array can`t be created");
+        for(int i = 1; i < userSettingsSplit.length; i++){
+        }
+        Dog [] dogToReturn = new Dog[firstWord];
+        if(firstWordIsIntegerType){
+
+            createDogArrayByStringUserSettings(dog);
+        }
+        return dog
+    }
+    protected void createDogArrayByStringUserSettings(Dog[] dog){
+
+    }
+    */
 }

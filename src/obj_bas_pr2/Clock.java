@@ -7,8 +7,7 @@ class Clock{
     static final int HID = 24;//hours in day
     static final int SIM = 60;//seconds in minute
     static final int SIH = 3600;//seconds in hour
-    {
-    }
+
     Clock(){
         hours = 12;
         minutes = 0;
