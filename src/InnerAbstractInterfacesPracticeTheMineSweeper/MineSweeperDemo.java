@@ -16,12 +16,17 @@ public class MineSweeperDemo {
     static final int HARD_BOMBS = 100;
 
     public static void main(String[] args) {
+        mineSweeperGame();
+    }
+
+    public static void mineSweeperGame(){
         MineSweeper mineSweeper;
         mineSweeper = mineSweeperBoardInit();
         //mineSweeper.printCellIsBomb();
-        //mineSweeper.printOpenedBoard();
+        mineSweeper.printOpenedBoard();
         playMineSweeper(mineSweeper);
     }
+
 
     public static MineSweeper mineSweeperBoardInit(){
 
@@ -66,41 +71,33 @@ public class MineSweeperDemo {
         Scanner scan = new Scanner(in);
         String moveOptionScan;
 
-        boolean userLearned = true;
-        while(true){
-            mineSweeper.showBoard();
-            out.println("Move : w(up), s(down), a(left), d(right), c(for clear board)");
-            moveOptionScan = scan.next();
-            char direction = moveOptionScan.charAt(0);
-            switch(direction){
-                case 'w': mineSweeper.movePen(MineSweeper.Direction.UP); break;
-                case 's': mineSweeper.movePen(MineSweeper.Direction.DOWN); break;
-                case 'a': mineSweeper.movePen(MineSweeper.Direction.LEFT); break;
-                case 'd': mineSweeper.movePen(MineSweeper.Direction.RIGHT); break;
-                case 'm': mineSweeper.penMarkBomb(); break;
-                case ' ': mineSweeper.penCheckBomb(); break;
-                case 'c': mineSweeper.clearBoard();  break;
-                default:
-                    out.println("You don`t move like this: " + moveOptionScan);
+        boolean youlose = false;
+        while(!youlose){
+            if(mineSweeper.getYouLose()){
+                mineSweeper.showBoard();
+                out.println("You Lose");
+                youlose = mineSweeper.getYouLose();
+                mineSweeperGame();
             }
-            userLearned = true;
+            else{
+                mineSweeper.showBoard();
+                //mineSweeper.getPosition();
+                out.println("Move : w(up), s(down), a(left), d(right), c(for clear board)");
+                moveOptionScan = scan.next();
+                char direction = moveOptionScan.charAt(0);
+                switch(direction){
+                    case 'w': mineSweeper.moveUp(); break;
+                    case 'a': mineSweeper.moveLeft(); break;
+                    case 'd': mineSweeper.moveRight(); break;
+                    case 's': mineSweeper.moveDown(); break;
+                    case 'r': mineSweeper.penMarkBomb(); break;
+                    case 'e': mineSweeper.penCheckBomb(mineSweeper.getPosition()); break;
+                    case 'x': mineSweeper.clearBoard();  break;
+                    default:
+                        out.println("You don`t move like this: " + moveOptionScan);
+                }
+            }
         }
     }
 
-    public static int getMoveSteps(){
-        Scanner scan = new Scanner(in);
-        int moveSteps;
-        out.println("Enter the number of steps ");
-        String checkEmptyStepValue = scan.nextLine();
-        if(checkEmptyStepValue.equals("")){
-            return 0;
-        }
-        moveSteps = Integer.parseInt(checkEmptyStepValue);
-        if(moveSteps < 0){
-            out.println("Number of steps can`t be less than 0. You don`t move");
-            moveSteps = 0;
-            return moveSteps;
-        }
-        return moveSteps;
-    }
 }

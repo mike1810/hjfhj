@@ -9,7 +9,8 @@ public class MineSweeper {
 
     private Position penPosition;
     private int Bombs;
-
+    private boolean youLose;
+    private boolean youWin;
     private boolean[][] cellIsBomb;
     private boolean[][] cellIsOpened;
 
@@ -24,8 +25,7 @@ public class MineSweeper {
         this.penPosition = new Position(0,0);
         this.closedChar = '.';
         this.markedCellChar = 'X';
-        this.penChar = 'I';
-        this.markedPenCellChar = 'Ж';
+        //this.markedPenCellChar = 'Ж';
     }
 
     MineSweeper(){
@@ -39,6 +39,8 @@ public class MineSweeper {
         this.penPosition = new Position(boardHeight/2, boardWidth/2);
         board = new char[height][width];
         cellIsOpened = new boolean[height][width];
+        youLose = false;
+        youWin = false;
         //openedBoard = new char[height][width];
 
         mineSweeperBoardInit();
@@ -64,7 +66,6 @@ public class MineSweeper {
             for(int j = 0; j < boardWidth; j++)
                 bombBoard[i][j] = false;
     }
-
 
     private char checkBombs(boolean [][] bombBoard, int hCell, int wCell) {
         int fromHeight = (hCell == 0) ? hCell : hCell - 1;
@@ -106,18 +107,9 @@ public class MineSweeper {
             return installedBombs;
         }
 
-    protected void getPosition(){
-        out.println("MineSweeper position is: "+ (penPosition.getX() + 1)+" column, " + (penPosition.getY() + 1) + " row.");
-    }
-
-    protected void turtleGraphicsBoardInit(int height, int width, int penPositionX, int penPositionY){
-        for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board[i].length; j++)
-            {
-                board[i][j] = closedChar;
-            }
-        }
-        board[penPosition.getX()][penPosition.getY()] = penChar;
+    protected Position getPosition(){
+        //out.println("MineSweeper position is: "+ (penPosition.getX() + 1) + " column, " + (penPosition.getY() + 1) + " row.");
+        return penPosition;
     }
 
     private void mineSweeperBoardInit(){
@@ -127,13 +119,12 @@ public class MineSweeper {
                 board[i][j] = closedChar;
             }
         }
-        board[penPosition.getX()][penPosition.getY()] = penChar;
     }
 
     private void mineSweeperCellIsOpenedInit(){
-        for(int i = 0; i < cellIsOpened.length; i++)
-            for (int j = 0; j < cellIsOpened[i].length; j++) {
-                cellIsOpened[i][j] = false;
+        for(int i = 0; i < boardWidth; i++)
+            for (int j = 0; j < boardHeight; j++) {
+                cellIsOpened[j][i] = false;
             }
     }
 
@@ -177,7 +168,7 @@ public class MineSweeper {
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++)
             {
-                if (i == penPosition.getX() && j == penPosition.getY()) {
+                if (i == penPosition.getY()  && j == penPosition.getX()) {
                     out.print("<" + board[i][j] + ">");
                 } else {
                     out.print(" " + board[i][j] + " ");
@@ -194,136 +185,151 @@ public class MineSweeper {
         }*/
     }
 
-    void movePen(Direction dir){
-        int realSteps = 1;
-        switch(dir.code){
-            case 'u':
-                realSteps = (this.penPosition.getX() - realSteps < 0) ? this.penPosition.getX() : realSteps;
-                movePenUp(realSteps);
-                break;
-            case 'd':
-                realSteps = (this.penPosition.getX() +  realSteps  >= board.length - 1) ?
-                        (board.length - (this.penPosition.getX()+1)) : realSteps;
-                movePenDown(realSteps);
-                break;
-            case 'l':
-                realSteps = (this.penPosition.getY() - realSteps < 0) ? this.penPosition.getY() : realSteps;
-                movePenLeft(realSteps);
-                break;
-            case 'r':
-                realSteps = (this.penPosition.getY() +  realSteps  >= board[penPosition.getX()].length - 1) ?
-                        (board[penPosition.getX()].length - (this.penPosition.getY()+1)) : realSteps;
-                movePenRight(realSteps);
-                break;
-        }
-    }
-
-    void penCheckBomb(){
+    void penCheckBomb(Position a){
         int posY = penPosition.getY();
         int posX = penPosition.getX();
 
-        if(openedBoard[posY][posX] != '@'){
+        if(openedBoard[posY][posX] != '0' && openedBoard[posY][posX] != '@'){
+            board[posY][posX] = openedBoard[posY][posX];
+            cellIsOpened[posX][posY] = true;
+        }
+        if(openedBoard[posY][posX] == '@'){
+            board[posY][posX] = '@';
+            cellIsOpened[posX][posY] = true;
+            youLose = true;
+            for(int i = 0; i < boardHeight; i++){
+                for(int j = 0; j < boardWidth; j++){
+                    if(board[posY][posX] == 'X'){
+                        board[posY][posX] = '*';
+                    }
+                }
+            }
+        }
+        if(openedBoard[posY][posX] == '0'){
+            board[posY][posX] = ' ';
+            cellIsOpened[posY][posX] = true;
 
+            if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1 && cellIsOpened[posY-1][posX-1] == false){
+                //penCheckBomb(new Position(posY - 1,posX - 1));
+                if(openedBoard[posY - 1][posX - 1] != '0' && openedBoard[posY - 1][posX - 1] != '@'){
+                    board[posY - 1][posX - 1] = openedBoard[posY - 1][posX - 1];
+                    cellIsOpened[posY - 1][posX - 1] = true;
+                }
+                if(openedBoard[posY - 1][posX - 1] == '0'){
+                    board[posY - 1][posX - 1] = ' ';
+                    cellIsOpened[posY - 1][posX - 1] = true;
+                }
+            }
+            if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY+1][posX-1] == false){
+                //penCheckBomb(new Position(posY + 1,posX - 1));
+                if(openedBoard[posY + 1][posX - 1] != '0' && openedBoard[posY + 1][posX - 1] != '@'){
+                    board[posY + 1][posX - 1] = openedBoard[posY + 1][posX - 1];
+                    cellIsOpened[posY + 1][posX - 1] = true;
+                }
+                if(openedBoard[posY + 1][posX - 1] == '0'){
+                    board[posY + 1][posX - 1] = ' ';
+                    cellIsOpened[posY + 1][posX - 1] = true;
+                }
+            }
+            if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY][posX-1] == false){
+                //penCheckBomb(new Position(posY,posX - 1));
+                if(openedBoard[posY][posX - 1] != '0' && openedBoard[posY][posX - 1] != '@'){
+                    board[posY][posX - 1] = openedBoard[posY][posX - 1];
+                    cellIsOpened[posY][posX - 1] = true;
+                }
+                if(openedBoard[posY][posX - 1] == '0'){
+                    board[posY][posX - 1] = ' ';
+                    cellIsOpened[posY][posX - 1] = true;
+                }
+            }
+            if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY-1][posX+1] == false){
+                //penCheckBomb(new Position(posY - 1,posX + 1));
+                if(openedBoard[posY - 1][posX + 1] != '0' && openedBoard[posY - 1][posX + 1] != '@'){
+                    board[posY - 1][posX - 1] = openedBoard[posY - 1][posX + 1];
+                    cellIsOpened[posY - 1][posX + 1] = true;
+                }
+                if(openedBoard[posY - 1][posX + 1] == '0'){
+                    board[posY - 1][posX + 1] = ' ';
+                    cellIsOpened[posY - 1][posX + 1] = true;
+                }
+            }
+            if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY+1][posX+1] == false){
+                //penCheckBomb(new Position(posY + 1,posX + 1));
+                if(openedBoard[posY + 1][posX + 1] != '0' && openedBoard[posY + 1][posX + 1] != '@'){
+                    board[posY + 1][posX + 1] = openedBoard[posY + 1][posX + 1];
+                    cellIsOpened[posY + 1][posX + 1] = true;
+                }
+                if(openedBoard[posY + 1][posX + 1] == '0'){
+                    board[posY + 1][posX + 1] = ' ';
+                    cellIsOpened[posY + 1][posX + 1] = true;
+                }
+            }
+            if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY][posX+1] == false){
+                //penCheckBomb(new Position(posY,posX + 1));
+                if(openedBoard[posY][posX + 1] != '0' && openedBoard[posY][posX + 1] != '@'){
+                    board[posY][posX + 1] = openedBoard[posY][posX + 1];
+                    cellIsOpened[posY][posX + 1] = true;
+                }
+                if(openedBoard[posY][posX + 1] == '0'){
+                    board[posY][posX + 1] = ' ';
+                    cellIsOpened[posY][posX + 1] = true;
+                }
+            }
+            if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY - 1][posX] == false){
+                //penCheckBomb(new Position(posY - 1,posX));
+                if(openedBoard[posY - 1][posX] != '0' && openedBoard[posY - 1][posX] != '@'){
+                    board[posY - 1][posX] = openedBoard[posY - 1][posX];
+                    cellIsOpened[posY - 1][posX] = true;
+                }
+                if(openedBoard[posY - 1][posX] == '0'){
+                    board[posY - 1][posX] = ' ';
+                    cellIsOpened[posY - 1][posX] = true;
+                }
+            }
+            if(posY > 0 && posY < boardWidth - 1 && posX > 0 && posX < boardHeight - 1&& cellIsOpened[posY + 1][posX] == false){
+                //penCheckBomb(new Position(posY + 1,posX));
+                if(openedBoard[posY + 1][posX] != '0' && openedBoard[posY + 1][posX] != '@'){
+                    board[posY + 1][posX] = openedBoard[posY + 1][posX];
+                    cellIsOpened[posY + 1][posX ] = true;
+                }
+                if(openedBoard[posY + 1][posX] == '0'){
+                    board[posY + 1][posX] = ' ';
+                    cellIsOpened[posY + 1][posX] = true;
+                }
+            }
         }
 
+    }
+
+    public boolean getYouLose(){
+        return youLose;
     }
 
     void penMarkBomb(){
-        board[penPosition.getX()][penPosition.getY()] = markedPenCellChar;
+        board[penPosition.getX()][penPosition.getY()] = markedCellChar;
     }
 
-    private void movePenUp(int steps){
-        int posY = penPosition.getY();
-        int posX = penPosition.getX();
-        for(int i = 0; i <=  steps; i++){
-            if(board[posX - i][posY] == closedChar){
-                board[posX - i][posY] = penChar;
-            }else{
-                if(board[posX - i][posY] == markedCellChar){
-                    board[posX - i][posY] = markedPenCellChar;
-                }
-            }
-            if(board[posX][posY] == markedPenCellChar){
-                board[posX][posY] = markedCellChar;
-            }else{
-                if( board[posX][posY] == penChar){
-                    board[posX][posY] = closedChar;
-                }
-            }
-            penPosition.setX(posX - i);
+    void moveLeft(){
+        if(penPosition.getX() > 0){
+            penPosition.setX(penPosition.getX() - 1);
         }
     }
 
-    private void movePenRight(int steps){
-        int posY = penPosition.getY();
-        int posX = penPosition.getX();
-        for(int j = 0; j <=  steps; j++){
-            if(board[posX][posY + j] == closedChar){
-                board[posX][posY + j] = penChar;
-            }else{
-                if(board[posX][posY + j] == markedCellChar){
-                    board[posX][posY + j] = markedPenCellChar;
-                }
-            }
-            if(board[posX][posY] == markedPenCellChar){
-                board[posX][posY] = markedCellChar;
-            }else{
-                if( board[posX][posY] == penChar){
-                    board[posX][posY] = closedChar;
-                }
-            }
-            penPosition.setY(posY + j);
+    void moveRight(){
+        if(penPosition.getX() < boardWidth - 1){
+            penPosition.setX(penPosition.getX() + 1);
         }
     }
 
-    private void movePenLeft(int steps){
-        int posY = penPosition.getY();
-        int posX = penPosition.getX();
-        for(int j = 0; j <=  steps; j++){
-            if(board[posX][posY - j] == closedChar){
-                board[posX][posY - j] = penChar;
-            }else{
-                if(board[posX][posY - j] == markedCellChar){
-                    board[posX][posY - j] = markedPenCellChar;
-                }
-            }
-            if(board[posX][posY] == markedPenCellChar){
-                board[posX][posY] = markedCellChar;
-            }else{
-                if( board[posX][posY] == penChar){
-                    board[posX][posY] = closedChar;
-                }
-            }
-            penPosition.setY(posY - j);
+    void moveUp(){
+        if(penPosition.getY() > 0) {
+            penPosition.setY(penPosition.getY() - 1);
         }
     }
 
-    private void movePenDown(int steps){
-
-        int posY = penPosition.getY();
-        int posX = penPosition.getX();
-        for(int i = 0; i <=  steps; i++){
-            if(board[posX + i][posY] == closedChar){
-                board[posX + i][posY] = penChar;
-            }else{
-                if(board[posX + i][posY] == markedCellChar){
-                    board[posX + i][posY] = markedPenCellChar;
-                }
+    void moveDown(){
+            if(penPosition.getY() < boardHeight - 1) {
+                penPosition.setY(penPosition.getY() + 1);
             }
-            if(board[posX][posY] == markedPenCellChar){
-                board[posX][posY] = markedCellChar;
-            }else{
-                if( board[posX][posY] == penChar){
-                    board[posX][posY] = closedChar;
-                }
-            }
-            penPosition.setX(posX + i);
-        }
-    }
-
-    enum Direction{
-        UP('u'),DOWN('d'),LEFT('l'),RIGHT('r');
-        public char code;
-        Direction(char code){this.code = code;}
     }
 }
