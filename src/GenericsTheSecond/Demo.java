@@ -1,44 +1,32 @@
 package GenericsTheSecond;
 
-import InnerAbstractInterfacesPracticeTheFirst.Rectangle;
-
 public class Demo {
-    public static void main(String[] args){
-/*
+    public static void main(String[] args) {
 
-        System.out.println(
-                "After that, print out values in variables:\n"
-                        + "1) integer: " + integer + "\n"
-                        + "2) square: " + square + "\n");
+        Vine fanagoria = new Vine
+                ("Fanagoria", 0.75, 12.5, 329.9);
+        Vine torreBlanca = new Vine
+                ("Torre-Blanca", 0.5, 12.5, 699.0 );
 
-        System.out.println(
-                "We created a genericEquals:\n"
-                        + "1) integer: " + integer + "\n"
-                        + "2) square: " + square + "\n");
+        System.out.println( "Compare result of two vine names: " +
+                GenericMethod.compareTo(fanagoria, torreBlanca));
 
-*/
+        Vine torreBlancaLowCost = new Vine
+                ("Torre-Blanca", 0.5, 12.5, 399.0 );
 
+        System.out.println( "Compare result of two vine names: " +
+                GenericMethod.compareTo(torreBlancaLowCost, torreBlanca));
 
+        Lemonade cola = new Lemonade("Coca-cola", 1, 100);
+        Lemonade sevenUp = new Lemonade("7UP", 1, 90);
 
-        GenericEquals<Rectangle> RectanglePair
-                = new GenericEquals<>();
-        System.out.println(
-                RectanglePair.equals(
-                new Rectangle((int)(Math.random()*4),(int)(Math.random()*2)),
-                new Rectangle((int)(Math.random())*4,(int)(Math.random()*2)))
-        );
+        System.out.println( "Compare result of two lemonade names: " +
+                GenericMethod.compareTo(cola, sevenUp));
 
-        //GenericEqualsOnlyForString <Integer> onlyForString = new GenericEquals<Integer>(2);
+        Vine colaVine = new Vine
+                ("Coca-cola", 0.75, 12.5, 329.9);
 
-        System.out.println(
-                "We created variable 'onlyForString' type of GenericEqualsOnlyForString \n");
-
-        GenericEqualsOnlyForString onlyForString = new GenericEqualsOnlyForString();
-        onlyForString.equals("qwe","qwe");
-
-
-        // Theirs width is in [0;4] like value 1 or 3
-        // Theirs length is in [0,2] like value 0 or 1
-
+        System.out.println( "Compare result of two: lemonade and vine names: " +
+                GenericMethod.compareTo(colaVine, cola));
     }
 }
