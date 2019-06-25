@@ -1,5 +1,5 @@
 package GenericsTheSecond;
 
-public interface Comparable <T> {
+public interface IComparable<T> {
     boolean equals(T e, T ee);
 }
