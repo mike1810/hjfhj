@@ -25,6 +25,16 @@ public class Rectangle extends Shape{
         setLength(length);
     }
 
+    @Override
+    void inputColour() {
+        System.out.print("What colour u need to paint rectangle? (input like 'red' or 'black')");
+        System.out.println();
+        String colour;
+        java.util.Scanner scan = new java.util.Scanner(System.in);
+        colour = scan.nextLine();
+        setColour(colour);
+    }
+
     public double getWidth() {
         return width;
     }
