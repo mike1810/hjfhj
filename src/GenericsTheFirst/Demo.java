@@ -1,4 +1,4 @@
-package Generics.GenericsTheFirst;
+package GenericsTheFirst;
 
 import InnerAbstractInterfacesPracticeTheFirst.Square;
 import InnerAbstractInterfacesPracticeTheFirst.Rectangle;
@@ -8,8 +8,8 @@ public class Demo {
 
         System.out.println(
                         "We will create a GenericPair 'integerAndSquare' with two arguments:\n"
-                        + "First argument bounds are upper with a type of Number subclasses.\n"
-                        + "Second argument bounds are upper too with a type of Rectangle subclasses.\n");
+                        + "First argument bound is upper with a type of Number subclasses.\n"
+                        + "Second argument bound is upper too with a type of Rectangle subclasses.\n");
 
         GenericPair<Integer, Square> integerAndSquare
                 = new GenericPair<Integer, Square>
@@ -34,8 +34,8 @@ public class Demo {
 
         System.out.println(
                         "We created a GenericPair 'superOfIntegerAndSquare' which has a lower bounds:\n"
-                        + "First argument is a superclass of Integer, includes value of 'integerAndSquare'.\n"
-                        + "Second argument is a superclass of Square, includes value of 'integerAndSquare'.\n"
+                        + "First argument is a superclass of Integer, includes first value of 'integerAndSquare'.\n"
+                        + "Second argument is a superclass of Square, includes second value of 'integerAndSquare'.\n"
                         + "\nAt the result, we can use methods to retrieve values into variables "
                         + "of Type Number('number') or Rectangle('rectangle')."
                         + "\nBut we can`t use them "
@@ -50,8 +50,8 @@ public class Demo {
                         + "1) number: " + number + "\n"
                         + "2) rectangle: " + rectangle + "\n");
 /*
-        // it works, but i don`t know why we need 'integerAndSquare' transformed
-        // to 'subOfSuperOfIntegerAndSquare'
+        // it works, but i don`t know why we need to have 'integerAndSquare' transformed
+        // into 'subOfSuperOfIntegerAndSquare', using 'superOfIntegerAndSquare'
         GenericPair<? extends Number, ? extends Rectangle> subOfSuperOfIntegerAndSquare =
         superOfIntegerAndSquare;
 */
@@ -59,8 +59,8 @@ public class Demo {
         System.out.println(
                         "We will create an object 'stringAndNumber' \n"
                         + "type of GenericPairWithoutBounds with two arguments:\n"
-                        + "1) First argument bounds has a type of String subclasses.\n"
-                        + "2) Second argument bounds has a type of Number subclasses.\n");
+                        + "1) First argument bounds has a type of String(can be other one).\n"
+                        + "2) Second argument bounds has a type of Number(can be other one).\n");
 
         GenericPairWithoutBounds<String, Number> stringAndNumber
                 = new GenericPairWithoutBounds<String, Number>

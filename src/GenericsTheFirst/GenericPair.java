@@ -1,4 +1,4 @@
-package Generics.GenericsTheFirst;
+package GenericsTheFirst;
 
 import InnerAbstractInterfacesPracticeTheFirst.Rectangle;
 

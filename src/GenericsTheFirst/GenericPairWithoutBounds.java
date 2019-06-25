@@ -1,4 +1,4 @@
-package Generics.GenericsTheFirst;
+package GenericsTheFirst;
 
 public class GenericPairWithoutBounds<T,V> {
     T first;

@@ -4,6 +4,7 @@ import InnerAbstractInterfacesPracticeTheFirst.Rectangle;
 
 public class Demo {
     public static void main(String[] args){
+/*
 
         System.out.println(
                 "After that, print out values in variables:\n"
@@ -15,6 +16,7 @@ public class Demo {
                         + "1) integer: " + integer + "\n"
                         + "2) square: " + square + "\n");
 
+*/
 
 
 
@@ -29,9 +31,7 @@ public class Demo {
         //GenericEqualsOnlyForString <Integer> onlyForString = new GenericEquals<Integer>(2);
 
         System.out.println(
-                "We created variable 'onlyForString' type of GenericEqualsOnlyForString \n"
-                        + "1) integer: " + integer + "\n"
-                        + "2) square: " + square + "\n");
+                "We created variable 'onlyForString' type of GenericEqualsOnlyForString \n");
 
         GenericEqualsOnlyForString onlyForString = new GenericEqualsOnlyForString();
         onlyForString.equals("qwe","qwe");
