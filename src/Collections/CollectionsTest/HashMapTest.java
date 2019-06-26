@@ -35,7 +35,7 @@ public class HashMapTest {
         System.out.println("\n\nSorted HashMap:");
         List<String> hashMapValues = new ArrayList<>(runners.values());
         Collections.sort(hashMapValues);
-        
+
 
         TreeMap<Integer, String> sorter = new TreeMap<>(runners);
         sorter.putAll(runners);
