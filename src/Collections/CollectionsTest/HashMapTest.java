@@ -12,7 +12,6 @@ public class HashMapTest {
         runners.put( new Person("Lena"),  4);
         runners.put( new Person("Ivan"),  5);
         runners.put( new Person("Tommy"), 57);
-        runners.put( new Person("Tommy"), 57);
 
         System.out.println("\nWe added some people into HashMap.");
         printHashMap(runners);
