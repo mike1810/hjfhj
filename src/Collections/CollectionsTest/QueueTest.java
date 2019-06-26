@@ -13,9 +13,6 @@ public class QueueTest {
         queue.add("Pasha");
         queue.add("Dasha");
         queue.add("Kasha");
-        queue.add("qwe");
-        queue.add("qew");
-        queue.add("qwe");
 
         queue.forEach(a -> System.out.println(a));
 

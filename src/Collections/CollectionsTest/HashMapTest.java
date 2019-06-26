@@ -6,32 +6,45 @@ import java.text.SimpleDateFormat;
 public class HashMapTest {
     public static void main(String[] args) {
 
-        HashMap<Person, Integer> runners = new HashMap<>();
+        HashMap< Integer, String > runners = new HashMap<>();
 
-        runners.put( new Person("Dima"),  1);
-        runners.put( new Person("Lena"),  4);
-        runners.put( new Person("Ivan"),  5);
-        runners.put( new Person("Tommy"), 57);
+        runners.put(1, "Lena" );
+        runners.put( 4, "Leonard");
+        runners.put( 59, "Ivan");
+        runners.put( 5, "Tommy");
 
         System.out.println("\nWe added some people into HashMap.");
+        //printHashMap(runners);
+
+        for(Map.Entry< Integer, String > item : runners.entrySet()){
+            System.out.println("ID: " + item.getKey() + " Name: " + item.getValue());
+        }
+
+        Person ivan = new Person("Ivan");
+        runners.remove(ivan);
+        System.out.println("\nWe removed person with key = 1");
         printHashMap(runners);
 
-        runners.remove("Ivan");
-        System.out.println("\nWe removed person with key = 1");
+        runners.replace(1, "Boris");
+        System.out.println("\nWe edited value with key = 1");
         printHashMap(runners);
 
         System.out.println("\n\nUnsorted united HashMap:");
         printHashMap(runners);
 
         System.out.println("\n\nSorted HashMap:");
-        TreeMap<Person, Integer> sorter = new TreeMap<>(runners);
+        List<String> hashMapValues = new ArrayList<>(runners.values());
+        Collections.sort(hashMapValues);
+        
+
+        TreeMap<Integer, String> sorter = new TreeMap<>(runners);
         sorter.putAll(runners);
-        for (HashMap.Entry<Person, Integer> entry : sorter.entrySet())
+        for (HashMap.Entry<Integer, String> entry : sorter.entrySet())
             System.out.println("Key = " + entry.getKey() +
                     ", Value = " + entry.getValue());
     }
 
-    private static void printHashMap(HashMap<Person, Integer> runners){
+    private static void printHashMap(HashMap<Integer, String > runners){
         runners.forEach((k,v) -> System.out.println( "Name: " + k + " Class: " + v));
     }
 
