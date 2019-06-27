@@ -20,18 +20,21 @@ public class CustomLinkedList <T>{
 
     public void add(T added) {
         if(size == 0){
-            Node<T> addFirst = new Node<T>(null, added, null);
-            head.container = added;
+            Node<T> addFirst = new Node<>(null, added, null);
+            head = addFirst;
+            size++;
+        }
+        if(size == 1){
+            Node<T> addToList = new Node<>(head, added , null);
+            tail = addToList;
+            head.next = tail;
             size++;
         }
         if(size > 1){
-            Node<T> addToList = new Node<T>(head, added , null);
-            head.next = addToList;
+            Node<T> addToList = new Node<>(tail, added , null);
+            tail.next = addToList;
             size++;
         }
-
-
-
     }
 
 
