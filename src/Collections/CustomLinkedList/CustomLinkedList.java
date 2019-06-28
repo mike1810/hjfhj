@@ -1,10 +1,6 @@
 package Collections.CustomLinkedList;
 
-import com.sun.org.apache.bcel.internal.classfile.DescendingVisitor;
-
-import java.util.Deque;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class CustomLinkedList <T> implements Iterable<T> {
     private Node <T> head;
@@ -75,40 +71,25 @@ public class CustomLinkedList <T> implements Iterable<T> {
         }
     }
 
-    public void removeAllElementsWithThisValue(T container){
+    public void removeFirst(){
+        remove(1);
+    }
+
+    public void removeLast(){
+        remove(size);
+    }
+
+    public void removeAllElementsWithValue(T container){
         Node<T> curr = head;
         for(int i = 0; i < size; i++){
-            curr = curr.next;
-            if(curr.container.equals(container)){
-                curr.prev.next = curr.next;
-                curr.next.prev = curr.prev;
-                size--;
-            }
+            remove(container);
         }
     }
 
-    public void removeFirst(T container){
-        if(size > 0){
-            head.next = head.next.next;
-            head.next.next.prev = head;
-        }else{
-            System.out.println("No values to remove");
-        }
-    }
-
-    public void removeLast(T container){
-        if(size > 0){
-            tail.prev = tail.prev.prev;
-            tail.prev.prev.next = tail;
-        }else{
-            System.out.println("No values to remove");
-        }
-    }
-
-    public CustomLinkedList<T> reverseElements(CustomLinkedList<T> current){
-        CustomLinkedList<T> reversed = new CustomLinkedList<>();
+    public CustomLinkedList<T> reverseElements(){
+        CustomLinkedList<T> reversed = new CustomLinkedList<T>();
+        CustomLinkedList<T> current = this;
         current.forEach(a->reversed.addFirst(a));
-        current.forEach(a->current.removeAllElementsWithThisValue(a));
         return reversed;
     }
 
