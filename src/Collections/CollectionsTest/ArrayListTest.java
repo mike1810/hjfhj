@@ -6,15 +6,15 @@ public class ArrayListTest {
 
     public static void main(String[] args) {
 
-        ArrayList<Integer> array = new ArrayList<>();
-
-        array.add(1);
-        array.add(-4);
-        array.add(11);
-        array.add(-4);
-        array.add(-5);
-        array.add(8);
-        array.add(5);
+        ArrayList<Integer> array = new ArrayList<Integer>(){{
+            add(1);
+            add(-4);
+            add(11);
+            add(-4);
+            add(-5);
+            add(8);
+            add(5);
+        }};
 
         System.out.println("\nWe added some numbers into array.");
 
@@ -30,17 +30,18 @@ public class ArrayListTest {
         printHashSet(array);
 
         Collections.sort(array);
-        System.out.println("\nWe sorted array:");
-
+        System.out.println("\nSorted array printed by Iterator:");
         Iterator arrayIterator = array.iterator();
         while(arrayIterator.hasNext()){
             System.out.print(arrayIterator.next() + " ");
         }
+        System.out.println();
     }
 
     private static void printHashSet(ArrayList<Integer> array){
         for(Integer a : array){
             System.out.print(a + " ");
         }
+        System.out.println();
     }
 }
