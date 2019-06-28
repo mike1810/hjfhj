@@ -1,4 +1,4 @@
-package ExceptionsPractice.ArrayIndexOutOfBoundsException;
+package ExceptionsPractice.TryCatchFinally;
 
 public class TryCatchFinally {
     public static void main(String[] args){

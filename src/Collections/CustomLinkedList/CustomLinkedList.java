@@ -92,7 +92,11 @@ public class CustomLinkedList <T> implements Iterable<T> {
         current.forEach(a->reversed.addFirst(a));
         return reversed;
     }
-
+    //
+    public CustomLinkedList<T> reverseElements2(){
+        return this;
+    }
+    //
     public int size(){
         return size;
     }

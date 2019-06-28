@@ -7,7 +7,10 @@ public class ArrayIndexOutOfBoundsException {
         try{
             System.out.println(array[6]);
         }catch(java.lang.ArrayIndexOutOfBoundsException ex){
-            System.out.println("Exception generated");
+            System.out.println("Exception 'ArrayIndexOutOfBoundsException' generated");
         }
     }
+
+
+
 }
