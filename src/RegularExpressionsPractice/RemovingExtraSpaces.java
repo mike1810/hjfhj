@@ -1,5 +1,4 @@
 package RegularExpressionsPractice;
-import java.io.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,8 +13,8 @@ public class RemovingExtraSpaces {
         Matcher matcher = oneSpaceBetweenTheWorlds.matcher(text);
         text = matcher.
                 replaceAll(" ").
-                replaceFirst("\\s{1,}","").
-                replaceFirst("(\\s{1,}\\Z)", "");
+                replaceFirst("\\s+","").
+                replaceFirst("(\\s+\\Z)", "");
         System.out.println(text);
     }
 }
