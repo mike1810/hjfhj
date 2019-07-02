@@ -24,7 +24,7 @@ public class QueueTest {
         queue.forEach(a -> System.out.println(a));
 
 
-        System.out.println("\nWe added nameы 'Macho-Man' and 'Zidane' into queue and sorted at once");
+        System.out.println("\nWe added names 'Macho-Man' and 'Zidane' into queue and sorted at once");
         queue.offer("Macho-Man");
         queue.offer("Zidane");
         queue.forEach(a -> System.out.println(a));
