@@ -93,7 +93,7 @@ public class Person implements Comparable<Person> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, age);
+        return Objects.hash(name);
     }
 
     @Override
