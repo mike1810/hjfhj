@@ -101,17 +101,17 @@ public class Demo {
                 Circle circle = (Circle) shape;
                 System.out.printf("\nCircle:\nArea is : %.3f\nPerimeter(curcumference) : %.3f\n",circle.getArea(),circle.getPerimeter());
                 System.out.printf("Radius: %.3f\n", circle.getRadius());
-                System.out.printf("Point (%.3f;%.3f) is inside circle: %b\n", x, y, circle.isInside(x,y));
+                System.out.printf("qwe (%.3f;%.3f) is inside circle: %b\n", x, y, circle.isInside(x,y));
             } else if(shape instanceof Square) {
                 Square square = (Square) shape;
                 System.out.printf("\nSquare:\nArea is : %.3f\nPerimeter : %.3f\n",square.getArea(),square.getPerimeter());
                 System.out.printf("Width: %.3f\nLength: %.3f\n", square.getWidth(), square.getLength());
-                System.out.printf("Point (%.3f;%.3f) is inside square: %b\n", x, y, square.isInside(x,y));
+                System.out.printf("qwe (%.3f;%.3f) is inside square: %b\n", x, y, square.isInside(x,y));
             } else if (shape instanceof Rectangle) {
                 Rectangle rectangle = (Rectangle) shape;
                 System.out.printf("\nRectangle:\nArea is : %.3f\nPerimeter : %.3f\n",rectangle.getArea(),rectangle.getPerimeter());
                 System.out.printf("Width: %.3f\nLength: %.3f\n", rectangle.getWidth(), rectangle.getLength());
-                System.out.printf("Point (%.3f;%.3f) is inside rectangle: %b\n", x, y, rectangle.isInside(x,y));
+                System.out.printf("qwe (%.3f;%.3f) is inside rectangle: %b\n", x, y, rectangle.isInside(x,y));
             }
         }
     }

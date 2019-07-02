@@ -29,29 +29,7 @@ public abstract class Shape {
         }
     }
 
-    void inputColour(){
-        boolean isCircle = false, isSquare = false, isRectangle = false;
-        if(this instanceof Circle){
-            isCircle = true;
-        }
-        if(this instanceof Square){
-            isSquare = true;
-        }else{
-            if(this instanceof Rectangle){
-                isRectangle = true;
-            }
-        }
-        if(isCircle){System.out.print("What colour u need to paint circle? (input like 'red' or 'black')");}
-        if(isSquare){System.out.print("What colour u need to paint square? (input like 'red' or 'black')");}
-        if(isRectangle){System.out.print("What colour u need to paint rectangle? (input like 'red' or 'black')");}
-
-        System.out.println();
-        String colour;
-        java.util.Scanner scan = new java.util.Scanner(System.in);
-        colour = scan.nextLine();
-        setColour(colour);
-
-    };
+    abstract void inputColour();
 
 
     public boolean getFilled() {

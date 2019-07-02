@@ -28,6 +28,16 @@ public class Square extends Rectangle {
     }
 
     @Override
+    void inputColour() {
+        System.out.print("What colour u need to paint square? (input like 'red' or 'black')");
+        System.out.println();
+        String colour;
+        java.util.Scanner scan = new java.util.Scanner(System.in);
+        colour = scan.nextLine();
+        setColour(colour);
+    }
+
+    @Override
     public void setWidth(double side) {
         if(side > 0) {
             super.setWidth(side);
