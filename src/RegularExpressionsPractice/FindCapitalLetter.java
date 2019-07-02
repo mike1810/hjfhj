@@ -9,8 +9,8 @@ public class FindCapitalLetter {
         String text = "Там виднелась надпись 'Warning!!!'. " +
                 "После, я зашёл в скрипучую дверь и увидел соседского щенка Toby," +
                 " который ужасно хотел есть...";
-        Pattern pattern = Pattern.compile("([A-Z]|[А-Я]).*?\\b");
-        Matcher matcher = pattern.matcher(text);
+        Pattern wordsWithCapitalLetter = Pattern.compile("([A-Z]|[А-Я]).*?\\b");
+        Matcher matcher = wordsWithCapitalLetter.matcher(text);
         System.out.println(text);
         while (matcher.find()){
             System.out.print(text.substring(matcher.start(), matcher.end()) + " ");
